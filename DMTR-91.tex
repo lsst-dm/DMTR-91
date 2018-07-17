@@ -20,7 +20,7 @@
 
 % Most recent last
 \setDocChangeRecord{
-\addtohist{}{2018-07-16}{Initial version.}{Comoretto}
+\addtohist{}{2018-07-16}{Initial version.}{Belm, Comoretto}
 }
 
 \setDocCurator{Eric Bellm}
@@ -40,7 +40,7 @@ This is the test report for \milestoneId{} (\milestoneName{}), an LSST DM level 
 \subsection{Objectives}
 \label{sect:objectives}
 
-This test specification demonstrates the successful execution of the major components of the Alert Distribution system at the scale of LSST Operations.
+This test activity demonstrates the successful execution of the major components of the Alert Distribution system at the scale of LSST Operations.
 
 It will demonstrate that:
 \begin{itemize}
@@ -117,7 +117,8 @@ As discussed in https://dmtn-028.lsst.io/ and https://dmtn-081.lsst.io/, the tes
 \subsection{Software}
 \label{sect:swconf}
 
-This test uses only the code in 
+This test uses only the code in
+ 
 \url{https://github.com/lsst-dm/alert_stream/} , commit ef3c9e16c42a3265d4f6258ba6983be8b009e7c0
 
 \subsection{Input Data}
@@ -134,7 +135,7 @@ Input data for all tests was based on simulated alert packets.
 \item LVV-T216 Tester: Eric Bellm
 \item LVV-T217 Tester: Eric Bellm
 \item LVV-T218 Tester: Eric Bellm
-\item Additional Personel involved: None 
+\item Additional Test Personel involved: None 
 \end{itemize}
 
 \newpage
@@ -207,6 +208,8 @@ Steps Executions Report:
   & Step Status: PASS \\\hline
 5 & Expected Result: Output should be similar to:
 
+\scriptsize{
+\begin{verbatim}
 kubectl get pods
 NAME                        READY     STATUS    RESTARTS   AGE
 kafka-768ddf5564-xwgvh      1/1       Running   0          31s
@@ -216,8 +219,11 @@ kubectl get services
 NAME        TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)     AGE
 kafka       ClusterIP   10.105.19.124   <none>        9092/TCP    6s
 zookeeper   ClusterIP   10.97.110.124   <none>        32181/TCP   2m
+\end{verbatim}
+}
+
 \\\cline{2-2}
-  & Actual Result: \\\cline{2-2}
+  & Actual Result: as expected \\\cline{2-2}
   & Step Status: PASS \\\hline
 \end{longtable}
 
@@ -250,6 +256,8 @@ Steps Executions Report:
   & Step Status: PASS \\\hline
 5 & Expected Result: Output should be similar to:
 
+\scriptsize{
+\begin{verbatim}
 kubectl get pods
 NAME                        READY     STATUS    RESTARTS   AGE
 kafka-768ddf5564-xwgvh      1/1       Running   0          31s
@@ -259,6 +267,8 @@ kubectl get services
 NAME        TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)     AGE
 kafka       ClusterIP   10.105.19.124   <none>        9092/TCP    6s
 zookeeper   ClusterIP   10.97.110.124   <none>        32181/TCP   2m
+\end{verbatim}
+}
 \\\cline{2-2}
   & Actual Result: \\\cline{2-2}
   & Step Status: PASS \\\hline
@@ -270,25 +280,37 @@ zookeeper   ClusterIP   10.97.110.124   <none>        32181/TCP   2m
   & Step Status: PASS \\\hline
 8 & Expected Result: Similar to
 
-$kubectl logs sender-7d6f98586f-nhwfj
+\scriptsize{
+\begin{verbatim}
+kubectl logs sender-7d6f98586f-nhwfj
 visit: 1570.     time: 1530588618.0313473
 visits finished: 1      time: 1530588653.5614944
 visit: 1571.     time: 1530588657.0087624
 visits finished: 2      time: 1530588692.506188
 visit: 1572.     time: 1530588696.0051727
-visits finished: 3      time: 1530588731.5900314$ \\\cline{2-2}
+visits finished: 3      time: 1530588731.5900314
+\end{verbatim}
+}
+ \\\cline{2-2}
   & Actual Result: 
 
-$visit: 1570.     time: 1530674964.0035944
+\scriptsize{
+\begin{verbatim}
+visit: 1570.     time: 1530674964.0035944
 visits finished: 1      time: 1530675000.5279133
 visit: 1571.     time: 1530675003.00461
 visits finished: 2      time: 1530675039.5390277
 visit: 1572.     time: 1530675042.005049
 visits finished: 3      time: 1530675078.4921534
-visit: 1573.     time: 1530675081.0037167$ \\\cline{2-2}
+visit: 1573.     time: 1530675081.0037167
+\end{verbatim}
+}
+
+\\\cline{2-2}
   & Step Status: PASS \\\hline
 9 & Expected Result: Similar to:
 
+\scriptsize{
 \begin{verbatim}
 {'alertId': 12132024420, 'l1dbId': 71776805594116, 'diaSource': {'diaSourceId':
 73499448928374785, 'ccdVisitId': 2020011570, 'diaObjectId': 71776805594116, 'ssO
@@ -301,16 +323,61 @@ _Cov': {'xSigma': 0.6135467886924744, 'ySigma': 0.77132648229599, 'x_y_Cov': 0.0
 04, 'psFlux': 7.698232025177276e-07, 'psRa': None, 'psDecl': None, 'ps_Cov': Non
 e, 'psLnL': None, 'psChi2': None, 'psNdata': None, 'trailFlux': None, 'trailRa':
 \end{verbatim}
+}
 
  \\\cline{2-2}
   & Actual Result: 
 
+\scriptsize{
 \begin{verbatim}
 topic:full-stream, partition:0, status:end, offset:0, key:None, time:1530674576.589
-{'alertId': 12132024420, 'l1dbId': 71776805594116, 'diaSource': {'diaSourceId': 73499448928374785, 'ccdVisitId': 2020011570, 'diaObjectId': 71776805594116, 'ssObjectId': None, 'parentDiaSourceId': None, 'midPointTai': 59595.37041, 'filterName': 'y', 'ra': 172.24912810036074, 'decl': -80.64214929176521, 'ra_decl_Cov': {'raSigma': 0.0003428002819418907, 'declSigma': 0.00027273103478364646, 'ra_decl_Cov': 0.000628734880592674}, 'x': 2979.08837890625, 'y': 3843.328857421875, 'x_y_Cov': {'xSigma': 0.6135467886924744, 'ySigma': 0.77132648229599, 'x_y_Cov': 0.0007463791407644749}, 'apFlux': None, 'apFluxErr': None, 'snr': 0.36651650071144104, 'psFlux': 7.698232025177276e-07, 'psRa': None, 'psDecl': None, 'ps_Cov': None, 'psLnL': None, 'psChi2': None, 'psNdata': None, 'trailFlux': None, 'trailRa': None, 'trailDecl': None, 'trailLength': None, 'trailAngle': None, 'trail_Cov': None, 'trailLnL': None, 'trailChi2': None, 'trailNdata': None, 'dipMeanFlux': None, 'dipFluxDiff': None, 'dipRa': None, 'dipDecl': None, 'dipLength': None, 'dipAngle': None, 'dip_Cov': None, 'dipLnL': None, 'dipChi2': None, 'dipNdata': None, 'totFlux': 7.267262844834477e-06, 'totFluxErr': 1.990927557926625e-06, 'diffFlux': 7.698232025177276e-07, 'diffFluxErr': 2.1003779693273827e-06, 'fpBkgd': None, 'fpBkgdErr': None, 'ixx': None, 'iyy': None, 'ixy': None, 'i_cov': None, 'ixxPSF': None, 'iyyPSF': None, 'ixyPSF': None, 'extendedness': None, 'spuriousness': None, 'flags': 516}, 'prv_diaSources': None, 'diaObject': {'diaObjectId': 71776805594116, 'ra': 172.249128110081, 'decl': -80.64214929171955, 'ra_decl_Cov': {'raSigma': 0.0003098504093941301, 'declSigma': 0.0001309745421167463, 'ra_decl_Cov': 0.0007125047268345952}, 'radecTai': 59595.139501, 'pmRa': -9.0, 'pmDecl': -0.25999999046325684, 'parallax': 1.1651986837387085, 'pm_parallax_Cov': {'pmRaSigma': 0.0, 'pmDeclSigma': 0.0, 'parallaxSigma': 0.0, 'pmRa_pmDecl_Cov': 0.0, 'pmRa_parallax_Cov': 0.0, 'pmDecl_parallax_Cov': 0.0}, 'pmParallaxLnL': 0.290818989276886, 'pmParallaxChi2': 0.399796724319458, 'pmParallaxNdata': 0, 'uPSFluxMean': None, 'uPSFluxMeanErr': None, 'uPSFluxSigma': None, 'uPSFluxChi2': None, 'uPSFluxNdata': None, 'gPSFluxMean': None, 'gPSFluxMeanErr': None, 'gPSFluxSigma': None, 'gPSFluxChi2': None, 'gPSFluxNdata': None, 'rPSFluxMean': None, 'rPSFluxMeanErr': None, 'rPSFluxSigma': None, 'rPSFluxChi2': None, 'rPSFluxNdata': None, 'iPSFluxMean': None, 'iPSFluxMeanErr': None, 'iPSFluxSigma': None, 'iPSFluxChi2': None, 'iPSFluxNdata': None, 'zPSFluxMean': None, 'zPSFluxMeanErr': None, 'zPSFluxSigma': None, 'zPSFluxChi2': None, 'zPSFluxNdata': None, 'yPSFluxMean': None, 'yPSFluxMeanErr': None, 'yPSFluxSigma': None, 'yPSFluxChi2': None, 'yPSFluxNdata': None, 'uFPFluxMean': None, 'uFPFluxMeanErr': None, 'uFPFluxSigma': None, 'gFPFluxMean': None, 'gFPFluxMeanErr': None, 'gFPFluxSigma': None, 'rFPFluxMean': None, 'rFPFluxMeanErr': None, 'rFPFluxSigma': None, 'iFPFluxMean': None, 'iFPFluxMeanErr': None, 'iFPFluxSigma': None, 'zFPFluxMean': None, 'zFPFluxMeanErr': None, 'zFPFluxSigma': None, 'yFPFluxMean': None, 'yFPFluxMeanErr': None, 'yFPFluxSigma': None, 'uLcPeriodic': None, 'gLcPeriodic': None, 'rLcPeriodic': None, 'iLcPeriodic': None, 'zLcPeriodic': None, 'yLcPeriodic': None, 'uLcNonPeriodic': None, 'gLcNonPeriodic': None, 'rLcNonPeriodic': None, 'iLcNonPeriodic': None, 'zLcNonPeriodic': None, 'yLcNonPeriodic': None, 'nearbyObj1': None, 'nearbyObj1Dist': None, 'nearbyObj1LnP': None, 'nearbyObj2': None, 'nearbyObj2Dist': None, 'nearbyObj2LnP': None, 'nearbyObj3': None, 'nearbyObj3Dist': None, 'nearbyObj3LnP': None, 'flags': 873}, 'ssObject': None, 'diaObjectL2': None, 'diaSourcesL2': None}
-
+{'alertId': 12132024420, 'l1dbId': 71776805594116, 'diaSource': {'diaSourceId': 734
+99448928374785, 'ccdVisitId': 2020011570, 'diaObjectId': 71776805594116, 'ssObjectI
+d': None, 'parentDiaSourceId': None, 'midPointTai': 59595.37041, 'filterName': 'y',
+ 'ra': 172.24912810036074, 'decl': -80.64214929176521, 'ra_decl_Cov': {'raSigma': 0
+.0003428002819418907, 'declSigma': 0.00027273103478364646, 'ra_decl_Cov': 0.0006287
+34880592674}, 'x': 2979.08837890625, 'y': 3843.328857421875, 'x_y_Cov': {'xSigma': 
+0.6135467886924744, 'ySigma': 0.77132648229599, 'x_y_Cov': 0.0007463791407644749}, 
+'apFlux': None, 'apFluxErr': None, 'snr': 0.36651650071144104, 'psFlux': 7.69823202
+5177276e-07, 'psRa': None, 'psDecl': None, 'ps_Cov': None, 'psLnL': None, 'psChi2':
+ None, 'psNdata': None, 'trailFlux': None, 'trailRa': None, 'trailDecl': None, 'tra
+ilLength': None, 'trailAngle': None, 'trail_Cov': None, 'trailLnL': None, 'trailChi
+2': None, 'trailNdata': None, 'dipMeanFlux': None, 'dipFluxDiff': None, 'dipRa': No
+ne, 'dipDecl': None, 'dipLength': None, 'dipAngle': None, 'dip_Cov': None, 'dipLnL'
+: None, 'dipChi2': None, 'dipNdata': None, 'totFlux': 7.267262844834477e-06, 'totFl
+uxErr': 1.990927557926625e-06, 'diffFlux': 7.698232025177276e-07, 'diffFluxErr': 2.
+1003779693273827e-06, 'fpBkgd': None, 'fpBkgdErr': None, 'ixx': None, 'iyy': None, 
+'ixy': None, 'i_cov': None, 'ixxPSF': None, 'iyyPSF': None, 'ixyPSF': None, 'extend
+edness': None, 'spuriousness': None, 'flags': 516}, 'prv_diaSources': None, 'diaObj
+ect': {'diaObjectId': 71776805594116, 'ra': 172.249128110081, 'decl': -80.642149291
+71955, 'ra_decl_Cov': {'raSigma': 0.0003098504093941301, 'declSigma': 0.00013097454
+21167463, 'ra_decl_Cov': 0.0007125047268345952}, 'radecTai': 59595.139501, 'pmRa': 
+-9.0, 'pmDecl': -0.25999999046325684, 'parallax': 1.1651986837387085, 'pm_parallax_
+Cov': {'pmRaSigma': 0.0, 'pmDeclSigma': 0.0, 'parallaxSigma': 0.0, 'pmRa_pmDecl_Cov
+': 0.0, 'pmRa_parallax_Cov': 0.0, 'pmDecl_parallax_Cov': 0.0}, 'pmParallaxLnL': 0.2
+90818989276886, 'pmParallaxChi2': 0.399796724319458, 'pmParallaxNdata': 0, 'uPSFlux
+Mean': None, 'uPSFluxMeanErr': None, 'uPSFluxSigma': None, 'uPSFluxChi2': None, 'uP
+SFluxNdata': None, 'gPSFluxMean': None, 'gPSFluxMeanErr': None, 'gPSFluxSigma': Non
+e, 'gPSFluxChi2': None, 'gPSFluxNdata': None, 'rPSFluxMean': None, 'rPSFluxMeanErr'
+: None, 'rPSFluxSigma': None, 'rPSFluxChi2': None, 'rPSFluxNdata': None, 'iPSFluxMe
+an': None, 'iPSFluxMeanErr': None, 'iPSFluxSigma': None, 'iPSFluxChi2': None, 'iPSF
+luxNdata': None, 'zPSFluxMean': None, 'zPSFluxMeanErr': None, 'zPSFluxSigma': None,
+ 'zPSFluxChi2': None, 'zPSFluxNdata': None, 'yPSFluxMean': None, 'yPSFluxMeanErr': 
+None, 'yPSFluxSigma': None, 'yPSFluxChi2': None, 'yPSFluxNdata': None, 'uFPFluxMean
+': None, 'uFPFluxMeanErr': None, 'uFPFluxSigma': None, 'gFPFluxMean': None, 'gFPFlu
+xMeanErr': None, 'gFPFluxSigma': None, 'rFPFluxMean': None, 'rFPFluxMeanErr': None,
+ 'rFPFluxSigma': None, 'iFPFluxMean': None, 'iFPFluxMeanErr': None, 'iFPFluxSigma':
+ None, 'zFPFluxMean': None, 'zFPFluxMeanErr': None, 'zFPFluxSigma': None, 'yFPFluxM
+ean': None, 'yFPFluxMeanErr': None, 'yFPFluxSigma': None, 'uLcPeriodic': None, 'gLc
+Periodic': None, 'rLcPeriodic': None, 'iLcPeriodic': None, 'zLcPeriodic': None, 'yL
+cPeriodic': None, 'uLcNonPeriodic': None, 'gLcNonPeriodic': None, 'rLcNonPeriodic':
+ None, 'iLcNonPeriodic': None, 'zLcNonPeriodic': None, 'yLcNonPeriodic': None, 'nea
+rbyObj1': None, 'nearbyObj1Dist': None, 'nearbyObj1LnP': None, 'nearbyObj2': None, 
+'nearbyObj2Dist': None, 'nearbyObj2LnP': None, 'nearbyObj3': None, 'nearbyObj3Dist'
+: None, 'nearbyObj3LnP': None, 'flags': 873}, 'ssObject': None, 'diaObjectL2': None
+, 'diaSourcesL2': None}
 \end{verbatim}
-
+}
  \\\cline{2-2}
   & Step Status: PASS \\\hline
 \end{longtable}
@@ -369,17 +436,24 @@ zookeeper   ClusterIP   10.97.110.124   <none>        32181/TCP   2m
   & Step Status: PASS \\\hline
 9 & Expected Result: Similar to
 
-$kubectl logs sender-7d6f98586f-nhwfj
+\scriptsize{
+\begin{verbatim}
+kubectl logs sender-7d6f98586f-nhwfj
 visit: 1570.     time: 1530588618.0313473
 visits finished: 1      time: 1530588653.5614944
 visit: 1571.     time: 1530588657.0087624
 visits finished: 2      time: 1530588692.506188
 visit: 1572.     time: 1530588696.0051727
 visits finished: 3      time: 1530588731.5900314
-$\\\cline{2-2}
-  & Actual Result:i
+\end{verbatim}
+}
 
-$visit: 1570.     time: 1530675627.0249922
+\\\cline{2-2}
+  & Actual Result:
+
+\scriptsize{
+\begin{verbatim}
+visit: 1570.     time: 1530675627.0249922
 visits finished: 1      time: 1530675664.2054636
 visit: 1571.     time: 1530675666.00571
 visits finished: 2      time: 1530675702.7181122
@@ -388,10 +462,13 @@ visits finished: 3      time: 1530675741.6658716
 visit: 1573.     time: 1530675744.0031254
 visits finished: 4      time: 1530675780.6261215
 visit: 1574.     time: 1530675783.0040474
-$ \\\cline{2-2}
+\end{verbatim}
+}
+ \\\cline{2-2}
   & Step Status: PASS\\\hline
 10 & Expected Result: 
 
+\scriptsize{
 \begin{verbatim}
 {'alertId': 12132024420, 'l1dbId': 71776805594116, 'diaSource': {'diaSourceId':
 73499448928374785, 'ccdVisitId': 2020011570, 'diaObjectId': 71776805594116, 'ssO
@@ -405,53 +482,68 @@ _Cov': {'xSigma': 0.6135467886924744, 'ySigma': 0.77132648229599, 'x_y_Cov': 0.0
 e, 'psLnL': None, 'psChi2': None, 'psNdata': None, 'trailFlux': None, 'trailRa':
 etc.
 \end{verbatim}
-
+}
 \\\cline{2-2}
   & Actual Result: 
 
+\tiny{
 \begin{verbatim}
 kubectl logs consumer1-6cdf9b57f4-swrpk | head -n 2
 topic:Filter001, partition:0, status:end, offset:0, key:None, time:1530675384.799
-{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId':...
+{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 
+'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId':...
 
 consumer 2:
 topic:Filter011, partition:0, status:end, offset:0, key:None, time:1530675474.542
-{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None, ...
+{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 
+'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None, ...
 
 consumer 3:
 topic:Filter021, partition:0, status:end, offset:0, key:None, time:1530675385.857
-{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None...
+{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 
+'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None...
 
 consumer 4:
 topic:Filter031, partition:0, status:end, offset:0, key:None, time:1530675386.571
-{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None,...
+{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 
+'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None,...
 
 consumer 5:
 topic:Filter041, partition:0, status:end, offset:0, key:None, time:1530675387.331
-{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None,...
+{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 
+'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None,...
 
 consumer 6:
-%3|1530675391.040|FAIL|rdkafka#consumer-1| [thrd:kafka.alerts-lsst.svc.cluster.local:9092/bootstrap]: kafka.alerts-lsst.svc.cluster.local:9092/bootstrap: Failed to resolve 'kafka.alerts-lsst.svc.cluster.local:9092': Temporary failure in name resolution
-%3|1530675391.040|ERROR|rdkafka#consumer-1| [thrd:kafka.alerts-lsst.svc.cluster.local:9092/bootstrap]: kafka.alerts-lsst.svc.cluster.local:9092/bootstrap: Failed to resolve 'kafka.alerts-lsst.svc.cluster.local:9092': Temporary failure in name resolution
-%3|1530675391.040|ERROR|rdkafka#consumer-1| [thrd:kafka.alerts-lsst.svc.cluster.local:9092/bootstrap]: 1/1 brokers are down
+%3|1530675391.040|FAIL|rdkafka#consumer-1| [thrd:kafka.alerts-lsst.svc.cluster.local:9092/bootstrap]
+: kafka.alerts-lsst.svc.cluster.local:9092/bootstrap: Failed to resolve 'kafka.alerts-lsst.svc.clust
+er.local:9092': Temporary failure in name resolution
+%3|1530675391.040|ERROR|rdkafka#consumer-1| [thrd:kafka.alerts-lsst.svc.cluster.local:9092/bootstrap
+]: kafka.alerts-lsst.svc.cluster.local:9092/bootstrap: Failed to resolve 'kafka.alerts-lsst.svc.clus
+ter.local:9092': Temporary failure in name resolution
+%3|1530675391.040|ERROR|rdkafka#consumer-1| [thrd:kafka.alerts-lsst.svc.cluster.local:9092/bootstrap
+]: 1/1 brokers are down
 
 consumer 7:
 topic:Filter061, partition:0, status:end, offset:0, key:None, time:1530675375.359
-{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None, 'parentDiaSourceId':...
+{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 
+'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None, 'parentDiaSourceId':...
 
 consumer 8:
 topic:Filter071, partition:0, status:end, offset:0, key:None, time:1530675391.847
-{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None...
+{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 
+'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None...
 
 consumer 9:
 topic:Filter081, partition:0, status:end, offset:0, key:None, time:1530675375.094
-{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None,...
+{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 
+'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None,...
 
 consumer 10:
 topic:Filter091, partition:0, status:end, offset:0, key:None, time:1530675385.894
-{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None...
+{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 
+'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None...
 \end{verbatim}
-
+}
 \\\cline{2-2}
   & Step Status: CONDITIONAL PASS\\\hline
 \end{longtable}
