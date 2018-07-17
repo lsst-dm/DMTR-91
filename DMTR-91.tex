@@ -59,10 +59,10 @@ The overall test plan for the LSST Data Management system is described in \cited
 
 This document specifically refers to the milestone \milestoneId{}, which tests the \product{}.
 
-The overall \product{} test specification is defined in \citeds{LDM-536}.
+The overall \product{} test specification is defined in \citeds{LDM-533}.
 
-This plan is is identified in JIRA as LVV-P1. The related test run is LVV-R3 that foresee the 
-execution of the following testm cases:
+This plan is identified in JIRA as LVV-P1. The related test run is LVV-R3 that foresee the 
+execution of the following test cases:
 
 \begin{description}
 
@@ -118,27 +118,16 @@ This test report refers to the execution of tests described in the section \ref{
 \label{sect:hwconf}
 
 Kubernetes Commons at LDF.
-%All tests were executed on systems in the LSST Data Facility.
-%
-%Software installation (DRP-00-00) and scientific analysis work (DRP-00-10 through DRP-00-35) were carried out on \texttt{lsst-dev01.ncsa.illinois.edu}.
-%At time of text execution, this was a Dell PowerEdge R730 with 24 physical Intel Xeon E5-2690v3 CPU cores at 2.60\,GHz and 256\,GB of RAM.
-%
-%Bulk data processing (DRP-00-05) was carried out on the LSST Verification Cluster (VC).
-%At the time of test execution, the VC provided 48 Dell C6320 nodes, each with 24 physical Intel Xeon E5-2680v3 CPU cores at 2.50\,GHz and 128\,GB of RAM.
 
 \subsection{Software}
 \label{sect:swconf}
 
 \url{https://github.com/lsst-dm/alert_stream/} , commit ef3c9e16c42a3265d4f6258ba6983be8b009e7c0
 
-% All systems used for testing --- including both \texttt{lsst-dev01} and the VC nodes --- were running CentOS Linux release 7.4.1708.
-%The \texttt{devtoolset-6}\footnote{\url{https://access.redhat.com/documentation/en-us/red_hat_developer_toolset/6/html/6.0_release_notes/}} toolchain, including GCC\footnote{\url{https://gcc.gnu.org/}} version 6.3.1, was enabled for all tests, with the exception DRP-00-00 for reasons described in \S\ref{sect:problems-drp-00-00}.
-%}
-
 \subsection{Input Data}
 \label{sect:inputdata}
 
-{\textit Input data for all tests was based on the DeCAM “HiTS” dataset, as described in \citeds{LDM-533}.}
+Input data for all tests was based on the DeCAM “HiTS” dataset, as described in \citeds{LDM-533}.
 
 \section{Personnel}
 \label{sect:personnel}
@@ -173,7 +162,7 @@ LVV-T218 & Conditional Pass & {\textit Missing git-lfs in step 2 and 3. Used doc
 
 The test campaign is considered in overall: PASS.
 
-{\textit provide reasons. There should be a fild in jira to specify this text}
+\textit{provide justification}
 
 
 \subsection{Recommended Improvements}
@@ -193,7 +182,7 @@ The test campaign is considered in overall: PASS.
 
 Test Execution Status: CONDITIONAL PASS
 
-Summary: Missing git-lfs in step 2. Used docker image instead. Remaining steps pass.
+Summary: Missing git-lfs in step 2 and 3. Used docker image instead. Remaining steps pass.
 
 Issues found: none.
 
