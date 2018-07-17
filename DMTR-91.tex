@@ -1,0 +1,477 @@
+\documentclass[DM,lsstdraft,STR,toc]{lsstdoc}
+
+\input meta.tex
+
+\begin{document}
+
+\def\milestoneName{Alert Distribution Validation}
+\def\milestoneId{LDM-503-5}
+\def\product{LSST Alert Distribution System}
+
+\setDocCompact{true}
+
+\title[\milestoneId{}~Test Report]{\milestoneId{} (\milestoneName{})~Test Report}
+\setDocRef{\lsstDocType-\lsstDocNum}
+\setDocDate{\vcsdate}
+\setDocUpstreamLocation{\url{https://github.com/lsst/lsst-texmf/examples}}
+\author{% `git log --pretty=%an | sort --key=2 | uniq` ?
+  Eric Bellm
+}
+
+% Most recent last
+\setDocChangeRecord{
+\addtohist{}{2018-07-16}{Initial version.}{Comoretto}
+}
+
+\setDocCurator{Eric Bellm}
+\setDocUpstreamLocation{\url{https://github.com/lsst-dm/\lsstDocType-\lsstDocNum}}
+\setDocUpstreamVersion{\vcsrevision}
+
+
+\setDocAbstract{
+This is the test report for \milestoneId{} (\milestoneName{}), an LSST DM level 1 milestone pertaining to the \product{}.
+}
+
+\maketitle
+
+\section{Introduction}
+\label{sect:intro}
+
+\subsection{Objectives}
+\label{sect:objectives}
+
+This test specification demonstrates the successful execution of the major components of the Alert Distribution system at the scale of LSST Operations.
+
+It will demonstrate that:
+\begin{itemize}
+\item The Alert Distribution payloads can be made available on systems managed by the LSST Data Facility
+\item The Alert Distribution payloads can be executed under the control of the relevant LDF services
+\item All required science data products can be passed through the components of the alert distribution service.
+\end{itemize}
+
+Note that this test plan does not extend to testing integration of the Alert Distribution System with the Alert Generation Science Pipeline or the LSST Science Platform.
+We also do not test the Alert Database at this time as its functional requirements are not sufficiently specified to enable testing.
+
+\subsection{Scope}
+\label{sect:scope}
+
+The overall test plan for the LSST Data Management system is described in \citeds{LDM-503}.
+
+This document specifically refers to the milestone \milestoneId{}, which tests the \product{}.
+
+The overall \product{} test specification is defined in \citeds{LDM-536}.
+
+This plan is is identified in JIRA as LVV-P1. The related test run is LVV-R3 that foresee the 
+execution of the following testm cases:
+
+\begin{description}
+
+  \item[LVV-T216(1.0)]{Installation of the Alert Distribution payloads}
+  \item[LVV-T217(1.0)]{Full Stream Alert Distribution}
+  \item[LVV-T218(1.0)]{Simple Filtering of the LSST Alert Stream}
+
+\end{description}
+
+\subsection{System Overview}
+\label{sect:systemoverview}
+
+The \product{} is that part of the LSST Data Management system which will be responsible for nightly data processing during LSST operations.
+The most prominent example of such processing is the generation of alerts from LSST difference images.
+However, the \product{} is also responsible for the distribution and filtering of alerts, excecution of precovery and forced photometry measurements, execution of the MOPS payload, and for the Level 1 Quality Control Service (\citeds{LDM-148}).
+The \milestoneId{} milestone focuses only on the alert generation part of the system.
+
+Note that we may broadly think of the \product{} as consisting of two independent parts: the Prompt and Offline Processing Services, which provide scheduling and workflow services, and the Science Payloads, which contain the algorithmic content.
+The \milestoneId{} milestone exercises only the science payloads.
+
+
+\subsection{Applicable Documents}
+\label{sect:appdocs}
+\addtocounter{table}{-1}
+
+\begin{tabular}[htb]{l l}
+\citeds{LDM-294} & LSST DM Project Management Plan\\
+\citeds{LDM-503} & DM Test Plan\\
+\citeds{LDM-533} & \product{} Test Specification\\
+\end{tabular}
+
+\subsection{References}
+\label{sect:references}
+
+\renewcommand{\refname}{}
+\bibliography{lsst,refs,books,refs_ads}
+
+\subsection{Document Overview}
+\label{sect:docoverview}
+
+Section \ref{sect:configuration} of this document provides details of the \product{} baseline used for this test, including relevant hardware and software configurations.
+Section \ref{sect:personnel} lists the individuals involved in performing the tests.
+Section \ref{sect:overview} provides an overview of the test results, while Section \ref{sect:detailed} provides more detailed results from each individual test case.
+
+\section{Test Configuration}
+\label{sect:configuration}
+
+\subsection{Documents}
+
+This test report refers to the execution of tests described in the section \ref{sect:scope} and documented in the \citeds{LDM-533} test specification issue 2.0.
+
+\subsection{Hardware}
+\label{sect:hwconf}
+
+Kubernetes Commons at LDF.
+%All tests were executed on systems in the LSST Data Facility.
+%
+%Software installation (DRP-00-00) and scientific analysis work (DRP-00-10 through DRP-00-35) were carried out on \texttt{lsst-dev01.ncsa.illinois.edu}.
+%At time of text execution, this was a Dell PowerEdge R730 with 24 physical Intel Xeon E5-2690v3 CPU cores at 2.60\,GHz and 256\,GB of RAM.
+%
+%Bulk data processing (DRP-00-05) was carried out on the LSST Verification Cluster (VC).
+%At the time of test execution, the VC provided 48 Dell C6320 nodes, each with 24 physical Intel Xeon E5-2680v3 CPU cores at 2.50\,GHz and 128\,GB of RAM.
+
+\subsection{Software}
+\label{sect:swconf}
+
+\url{https://github.com/lsst-dm/alert_stream/} , commit ef3c9e16c42a3265d4f6258ba6983be8b009e7c0
+
+% All systems used for testing --- including both \texttt{lsst-dev01} and the VC nodes --- were running CentOS Linux release 7.4.1708.
+%The \texttt{devtoolset-6}\footnote{\url{https://access.redhat.com/documentation/en-us/red_hat_developer_toolset/6/html/6.0_release_notes/}} toolchain, including GCC\footnote{\url{https://gcc.gnu.org/}} version 6.3.1, was enabled for all tests, with the exception DRP-00-00 for reasons described in \S\ref{sect:problems-drp-00-00}.
+%}
+
+\subsection{Input Data}
+\label{sect:inputdata}
+
+{\textit Input data for all tests was based on the DeCAM “HiTS” dataset, as described in \citeds{LDM-533}.}
+
+\section{Personnel}
+\label{sect:personnel}
+
+\begin{itemize}
+\item Test Plan (LVV-P1) Owner: Eric Bellm
+\item Test Run (LVV-R3) Owner: Eric Bellm
+\item LVV-T216 Tester: Eric Bellm
+\item LVV-T217 Tester: Eric Bellm
+\item LVV-T218 Tester: Eric Bellm
+\item Additional Personel involved: None 
+\end{itemize}
+
+\newpage
+
+\section{Overview of the Test Results}
+\label{sect:overview}
+
+\subsection{Summary Table}
+\label{sect:summarytable}
+
+
+\begin{longtable} {|p{0.2\textwidth}|p{0.2\textwidth}|p{0.6\textwidth}|}\hline
+{\bf TEST CASE ID} & {\bf PASS/FAIL} & {\bf COMMENTS} \\\hline
+LVV-T216 & Conditional Pass & {\textit Missing git-lfs in step 2 and 3. Used docker image instead. Remaining steps pass.} \\\hline
+LVV-T217 & Conditional Pass & {\textit Missing git-lfs in step 2 and 3. Used docker image instead. Remaining steps pass.} \\\hline
+LVV-T218 & Conditional Pass & {\textit Missing git-lfs in step 2 and 3. Used docker image instead. Last step result deviated slighlty from the expected result.} \\\hline
+\end{longtable}
+
+\subsection{Overall Assessment}
+\label{sect:overallassessment}
+
+The test campaign is considered in overall: PASS.
+
+{\textit provide reasons. There should be a fild in jira to specify this text}
+
+
+\subsection{Recommended Improvements}
+\label{sect:recommendations}
+
+
+
+
+\newpage
+
+\section{Detailed Test Results}
+\label{sect:detailed}
+
+
+\subsection{LVV-T216(1.0): Installation of the Alert Distribution payloads}
+\label{sect:detail-lvv-t216}
+
+Test Execution Status: CONDITIONAL PASS
+
+Summary: Missing git-lfs in step 2. Used docker image instead. Remaining steps pass.
+
+Issues found: none.
+
+Steps Executions Report:
+
+\begin{longtable}{p{2cm}p{14cm}}
+\hline
+{Step} & {Actual Results and Status}\\ \hline
+1 & Expected Result: Runs without error \\\cline{2-2}
+  & Actual REsult: runs without error \\\cline{2-2}
+  & Step Status: PASS \\\hline
+2 & Expected Result: Runs without error \\\cline{2-2}
+  & Actual Result: Did not execute because of missing git-lfs; used pre-built Docker image instead. \\\cline{2-2}
+  & Step Status: CONDITIONAL PASS \\\hline
+3 & Expected Result: Runs without error \\\cline{2-2}
+  & Actual Result: Did not execute because of missing git-lfs; used pre-built Docker image instead \\\cline{2-2}
+  & Step Status: CONDITIONAL PASS \\\hline
+4 & Expected Result: Runs without error \\\cline{2-2}
+  & Actual Result: \\\cline{2-2}
+  & Step Status: PASS \\\hline
+5 & Expected Result: Output should be similar to:
+
+kubectl get pods
+NAME                        READY     STATUS    RESTARTS   AGE
+kafka-768ddf5564-xwgvh      1/1       Running   0          31s
+zookeeper-f798cc548-mgkpn   1/1       Running   0          1m
+
+kubectl get services
+NAME        TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)     AGE
+kafka       ClusterIP   10.105.19.124   <none>        9092/TCP    6s
+zookeeper   ClusterIP   10.97.110.124   <none>        32181/TCP   2m
+\\\cline{2-2}
+  & Actual Result: \\\cline{2-2}
+  & Step Status: PASS \\\hline
+\end{longtable}
+
+
+\subsection{LVV-T217(1.0: Full Stream Alert Distribution}
+\label{sect:detail-lvv-t216}
+
+Test Execution Status: CONDITIONAL PASS
+
+Summary: Missing git-lfs in step 2. Used docker image instead. Remaining steps pass.
+
+Issues found: none.
+
+Steps Executions Report:
+
+\begin{longtable}{p{2cm}p{14cm}}
+\hline
+{Step} & {Actual Results and Status}\\ \hline
+1 & Expected Result: Runs without error \\\cline{2-2}
+  & Actual REsult: runs without error \\\cline{2-2}
+  & Step Status: PASS \\\hline
+2 & Expected Result: Runs without error \\\cline{2-2}
+  & Actual Result: Did not execute because of missing git-lfs; used pre-built Docker image instead. \\\cline{2-2}
+  & Step Status: CONDITIONAL PASS \\\hline
+3 & Expected Result: Runs without error \\\cline{2-2}
+  & Actual Result: Did not execute because of missing git-lfs; used pre-built Docker image instead \\\cline{2-2}
+  & Step Status: CONDITIONAL PASS \\\hline
+4 & Expected Result: Runs without error \\\cline{2-2}
+  & Actual Result: \\\cline{2-2}
+  & Step Status: PASS \\\hline
+5 & Expected Result: Output should be similar to:
+
+kubectl get pods
+NAME                        READY     STATUS    RESTARTS   AGE
+kafka-768ddf5564-xwgvh      1/1       Running   0          31s
+zookeeper-f798cc548-mgkpn   1/1       Running   0          1m
+
+kubectl get services
+NAME        TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)     AGE
+kafka       ClusterIP   10.105.19.124   <none>        9092/TCP    6s
+zookeeper   ClusterIP   10.97.110.124   <none>        32181/TCP   2m
+\\\cline{2-2}
+  & Actual Result: \\\cline{2-2}
+  & Step Status: PASS \\\hline
+6 & Expected Result: Runs without error \\\cline{2-2}
+  & Actual Result: \\\cline{2-2}
+  & Step Status: PASS \\\hline
+7 & Expected Result: Runs without error \\\cline{2-2}
+  & Actual Result: \\\cline{2-2}
+  & Step Status: PASS \\\hline
+8 & Expected Result: Similar to
+
+$kubectl logs sender-7d6f98586f-nhwfj
+visit: 1570.     time: 1530588618.0313473
+visits finished: 1      time: 1530588653.5614944
+visit: 1571.     time: 1530588657.0087624
+visits finished: 2      time: 1530588692.506188
+visit: 1572.     time: 1530588696.0051727
+visits finished: 3      time: 1530588731.5900314$ \\\cline{2-2}
+  & Actual Result: 
+
+$visit: 1570.     time: 1530674964.0035944
+visits finished: 1      time: 1530675000.5279133
+visit: 1571.     time: 1530675003.00461
+visits finished: 2      time: 1530675039.5390277
+visit: 1572.     time: 1530675042.005049
+visits finished: 3      time: 1530675078.4921534
+visit: 1573.     time: 1530675081.0037167$ \\\cline{2-2}
+  & Step Status: PASS \\\hline
+9 & Expected Result: Similar to:
+
+\begin{verbatim}
+{'alertId': 12132024420, 'l1dbId': 71776805594116, 'diaSource': {'diaSourceId':
+73499448928374785, 'ccdVisitId': 2020011570, 'diaObjectId': 71776805594116, 'ssO
+bjectId': None, 'parentDiaSourceId': None, 'midPointTai': 59595.37041, 'filterNa
+me': 'y', 'ra': 172.24912810036074, 'decl': -80.64214929176521, 'ra_decl_Cov': {
+'raSigma': 0.0003428002819418907, 'declSigma': 0.00027273103478364646, 'ra_decl_
+Cov': 0.000628734880592674}, 'x': 2979.08837890625, 'y': 3843.328857421875, 'x_y
+_Cov': {'xSigma': 0.6135467886924744, 'ySigma': 0.77132648229599, 'x_y_Cov': 0.0
+007463791407644749}, 'apFlux': None, 'apFluxErr': None, 'snr': 0.366516500711441
+04, 'psFlux': 7.698232025177276e-07, 'psRa': None, 'psDecl': None, 'ps_Cov': Non
+e, 'psLnL': None, 'psChi2': None, 'psNdata': None, 'trailFlux': None, 'trailRa':
+\end{verbatim}
+
+ \\\cline{2-2}
+  & Actual Result: 
+
+\begin{verbatim}
+topic:full-stream, partition:0, status:end, offset:0, key:None, time:1530674576.589
+{'alertId': 12132024420, 'l1dbId': 71776805594116, 'diaSource': {'diaSourceId': 73499448928374785, 'ccdVisitId': 2020011570, 'diaObjectId': 71776805594116, 'ssObjectId': None, 'parentDiaSourceId': None, 'midPointTai': 59595.37041, 'filterName': 'y', 'ra': 172.24912810036074, 'decl': -80.64214929176521, 'ra_decl_Cov': {'raSigma': 0.0003428002819418907, 'declSigma': 0.00027273103478364646, 'ra_decl_Cov': 0.000628734880592674}, 'x': 2979.08837890625, 'y': 3843.328857421875, 'x_y_Cov': {'xSigma': 0.6135467886924744, 'ySigma': 0.77132648229599, 'x_y_Cov': 0.0007463791407644749}, 'apFlux': None, 'apFluxErr': None, 'snr': 0.36651650071144104, 'psFlux': 7.698232025177276e-07, 'psRa': None, 'psDecl': None, 'ps_Cov': None, 'psLnL': None, 'psChi2': None, 'psNdata': None, 'trailFlux': None, 'trailRa': None, 'trailDecl': None, 'trailLength': None, 'trailAngle': None, 'trail_Cov': None, 'trailLnL': None, 'trailChi2': None, 'trailNdata': None, 'dipMeanFlux': None, 'dipFluxDiff': None, 'dipRa': None, 'dipDecl': None, 'dipLength': None, 'dipAngle': None, 'dip_Cov': None, 'dipLnL': None, 'dipChi2': None, 'dipNdata': None, 'totFlux': 7.267262844834477e-06, 'totFluxErr': 1.990927557926625e-06, 'diffFlux': 7.698232025177276e-07, 'diffFluxErr': 2.1003779693273827e-06, 'fpBkgd': None, 'fpBkgdErr': None, 'ixx': None, 'iyy': None, 'ixy': None, 'i_cov': None, 'ixxPSF': None, 'iyyPSF': None, 'ixyPSF': None, 'extendedness': None, 'spuriousness': None, 'flags': 516}, 'prv_diaSources': None, 'diaObject': {'diaObjectId': 71776805594116, 'ra': 172.249128110081, 'decl': -80.64214929171955, 'ra_decl_Cov': {'raSigma': 0.0003098504093941301, 'declSigma': 0.0001309745421167463, 'ra_decl_Cov': 0.0007125047268345952}, 'radecTai': 59595.139501, 'pmRa': -9.0, 'pmDecl': -0.25999999046325684, 'parallax': 1.1651986837387085, 'pm_parallax_Cov': {'pmRaSigma': 0.0, 'pmDeclSigma': 0.0, 'parallaxSigma': 0.0, 'pmRa_pmDecl_Cov': 0.0, 'pmRa_parallax_Cov': 0.0, 'pmDecl_parallax_Cov': 0.0}, 'pmParallaxLnL': 0.290818989276886, 'pmParallaxChi2': 0.399796724319458, 'pmParallaxNdata': 0, 'uPSFluxMean': None, 'uPSFluxMeanErr': None, 'uPSFluxSigma': None, 'uPSFluxChi2': None, 'uPSFluxNdata': None, 'gPSFluxMean': None, 'gPSFluxMeanErr': None, 'gPSFluxSigma': None, 'gPSFluxChi2': None, 'gPSFluxNdata': None, 'rPSFluxMean': None, 'rPSFluxMeanErr': None, 'rPSFluxSigma': None, 'rPSFluxChi2': None, 'rPSFluxNdata': None, 'iPSFluxMean': None, 'iPSFluxMeanErr': None, 'iPSFluxSigma': None, 'iPSFluxChi2': None, 'iPSFluxNdata': None, 'zPSFluxMean': None, 'zPSFluxMeanErr': None, 'zPSFluxSigma': None, 'zPSFluxChi2': None, 'zPSFluxNdata': None, 'yPSFluxMean': None, 'yPSFluxMeanErr': None, 'yPSFluxSigma': None, 'yPSFluxChi2': None, 'yPSFluxNdata': None, 'uFPFluxMean': None, 'uFPFluxMeanErr': None, 'uFPFluxSigma': None, 'gFPFluxMean': None, 'gFPFluxMeanErr': None, 'gFPFluxSigma': None, 'rFPFluxMean': None, 'rFPFluxMeanErr': None, 'rFPFluxSigma': None, 'iFPFluxMean': None, 'iFPFluxMeanErr': None, 'iFPFluxSigma': None, 'zFPFluxMean': None, 'zFPFluxMeanErr': None, 'zFPFluxSigma': None, 'yFPFluxMean': None, 'yFPFluxMeanErr': None, 'yFPFluxSigma': None, 'uLcPeriodic': None, 'gLcPeriodic': None, 'rLcPeriodic': None, 'iLcPeriodic': None, 'zLcPeriodic': None, 'yLcPeriodic': None, 'uLcNonPeriodic': None, 'gLcNonPeriodic': None, 'rLcNonPeriodic': None, 'iLcNonPeriodic': None, 'zLcNonPeriodic': None, 'yLcNonPeriodic': None, 'nearbyObj1': None, 'nearbyObj1Dist': None, 'nearbyObj1LnP': None, 'nearbyObj2': None, 'nearbyObj2Dist': None, 'nearbyObj2LnP': None, 'nearbyObj3': None, 'nearbyObj3Dist': None, 'nearbyObj3LnP': None, 'flags': 873}, 'ssObject': None, 'diaObjectL2': None, 'diaSourcesL2': None}
+
+\end{verbatim}
+
+ \\\cline{2-2}
+  & Step Status: PASS \\\hline
+\end{longtable}
+
+
+
+
+\subsection{LVV-T218(1.0): Simple Filtering of the LSST Alert Stream}
+\label{sect:detail-lvv-t216}
+
+Test Execution Status: CONDITIONAL PASS
+
+Summary: Missing git-lfs in step 2 and 3. Used docker image instead. Last step result deviated slighlty from the expected result.
+
+Issues found: none.
+
+Steps Executions Report:
+
+\begin{longtable}{p{2cm}p{14cm}}
+\hline
+{Step} & {Actual Results and Status}\\ \hline
+1 & Expected Result: Runs without error \\\cline{2-2}
+  & Actual REsult: runs without error \\\cline{2-2}
+  & Step Status: PASS \\\hline
+2 & Expected Result: Runs without error \\\cline{2-2}
+  & Actual Result: Did not execute because of missing git-lfs; used pre-built Docker image instead. \\\cline{2-2}
+  & Step Status: CONDITIONAL PASS \\\hline
+3 & Expected Result: Runs without error \\\cline{2-2}
+  & Actual Result: Did not execute because of missing git-lfs; used pre-built Docker image instead \\\cline{2-2}
+  & Step Status: CONDITIONAL PASS \\\hline
+4 & Expected Result: Runs without error \\\cline{2-2}
+  & Actual Result: \\\cline{2-2}
+  & Step Status: PASS \\\hline
+5 & Expected Result: Output should be similar to:
+
+kubectl get pods
+NAME                        READY     STATUS    RESTARTS   AGE
+kafka-768ddf5564-xwgvh      1/1       Running   0          31s
+zookeeper-f798cc548-mgkpn   1/1       Running   0          1m
+
+kubectl get services
+NAME        TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)     AGE
+kafka       ClusterIP   10.105.19.124   <none>        9092/TCP    6s
+zookeeper   ClusterIP   10.97.110.124   <none>        32181/TCP   2m
+\\\cline{2-2}
+  & Actual Result: \\\cline{2-2}
+  & Step Status: PASS \\\hline
+6 & Expected Result: Runs without error \\\cline{2-2}
+  & Actual Result: \\\cline{2-2}
+  & Step Status: PASS \\\hline
+7 & Expected Result: Runs without error \\\cline{2-2}
+  & Actual Result: \\\cline{2-2}
+  & Step Status: PASS \\\hline
+8 & Expected Result: Runs without error \\\cline{2-2}
+  & Actual Result: \\\cline{2-2}
+  & Step Status: PASS \\\hline
+9 & Expected Result: Similar to
+
+$kubectl logs sender-7d6f98586f-nhwfj
+visit: 1570.     time: 1530588618.0313473
+visits finished: 1      time: 1530588653.5614944
+visit: 1571.     time: 1530588657.0087624
+visits finished: 2      time: 1530588692.506188
+visit: 1572.     time: 1530588696.0051727
+visits finished: 3      time: 1530588731.5900314
+$\\\cline{2-2}
+  & Actual Result:i
+
+$visit: 1570.     time: 1530675627.0249922
+visits finished: 1      time: 1530675664.2054636
+visit: 1571.     time: 1530675666.00571
+visits finished: 2      time: 1530675702.7181122
+visit: 1572.     time: 1530675705.0034182
+visits finished: 3      time: 1530675741.6658716
+visit: 1573.     time: 1530675744.0031254
+visits finished: 4      time: 1530675780.6261215
+visit: 1574.     time: 1530675783.0040474
+$ \\\cline{2-2}
+  & Step Status: PASS\\\hline
+10 & Expected Result: 
+
+\begin{verbatim}
+{'alertId': 12132024420, 'l1dbId': 71776805594116, 'diaSource': {'diaSourceId':
+73499448928374785, 'ccdVisitId': 2020011570, 'diaObjectId': 71776805594116, 'ssO
+bjectId': None, 'parentDiaSourceId': None, 'midPointTai': 59595.37041, 'filterNa
+me': 'y', 'ra': 172.24912810036074, 'decl': -80.64214929176521, 'ra_decl_Cov': {
+'raSigma': 0.0003428002819418907, 'declSigma': 0.00027273103478364646, 'ra_decl_
+Cov': 0.000628734880592674}, 'x': 2979.08837890625, 'y': 3843.328857421875, 'x_y
+_Cov': {'xSigma': 0.6135467886924744, 'ySigma': 0.77132648229599, 'x_y_Cov': 0.0
+007463791407644749}, 'apFlux': None, 'apFluxErr': None, 'snr': 0.366516500711441
+04, 'psFlux': 7.698232025177276e-07, 'psRa': None, 'psDecl': None, 'ps_Cov': Non
+e, 'psLnL': None, 'psChi2': None, 'psNdata': None, 'trailFlux': None, 'trailRa':
+etc.
+\end{verbatim}
+
+\\\cline{2-2}
+  & Actual Result: 
+
+\begin{verbatim}
+kubectl logs consumer1-6cdf9b57f4-swrpk | head -n 2
+topic:Filter001, partition:0, status:end, offset:0, key:None, time:1530675384.799
+{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId':...
+
+consumer 2:
+topic:Filter011, partition:0, status:end, offset:0, key:None, time:1530675474.542
+{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None, ...
+
+consumer 3:
+topic:Filter021, partition:0, status:end, offset:0, key:None, time:1530675385.857
+{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None...
+
+consumer 4:
+topic:Filter031, partition:0, status:end, offset:0, key:None, time:1530675386.571
+{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None,...
+
+consumer 5:
+topic:Filter041, partition:0, status:end, offset:0, key:None, time:1530675387.331
+{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None,...
+
+consumer 6:
+%3|1530675391.040|FAIL|rdkafka#consumer-1| [thrd:kafka.alerts-lsst.svc.cluster.local:9092/bootstrap]: kafka.alerts-lsst.svc.cluster.local:9092/bootstrap: Failed to resolve 'kafka.alerts-lsst.svc.cluster.local:9092': Temporary failure in name resolution
+%3|1530675391.040|ERROR|rdkafka#consumer-1| [thrd:kafka.alerts-lsst.svc.cluster.local:9092/bootstrap]: kafka.alerts-lsst.svc.cluster.local:9092/bootstrap: Failed to resolve 'kafka.alerts-lsst.svc.cluster.local:9092': Temporary failure in name resolution
+%3|1530675391.040|ERROR|rdkafka#consumer-1| [thrd:kafka.alerts-lsst.svc.cluster.local:9092/bootstrap]: 1/1 brokers are down
+
+consumer 7:
+topic:Filter061, partition:0, status:end, offset:0, key:None, time:1530675375.359
+{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None, 'parentDiaSourceId':...
+
+consumer 8:
+topic:Filter071, partition:0, status:end, offset:0, key:None, time:1530675391.847
+{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None...
+
+consumer 9:
+topic:Filter081, partition:0, status:end, offset:0, key:None, time:1530675375.094
+{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None,...
+
+consumer 10:
+topic:Filter091, partition:0, status:end, offset:0, key:None, time:1530675385.894
+{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None...
+\end{verbatim}
+
+\\\cline{2-2}
+  & Step Status: CONDITIONAL PASS\\\hline
+\end{longtable}
+
+
+
+
+
+\newpage
+\appendix
+\section{Additional Analysis}
+
+
+\end{document}
