@@ -75,14 +75,8 @@ execution of the following test cases:
 \subsection{System Overview}
 \label{sect:systemoverview}
 
-The \product{} is that part of the LSST Data Management system which will be responsible for nightly data processing during LSST operations.
-The most prominent example of such processing is the generation of alerts from LSST difference images.
-However, the \product{} is also responsible for the distribution and filtering of alerts, excecution of precovery and forced photometry measurements, execution of the MOPS payload, and for the Level 1 Quality Control Service (\citeds{LDM-148}).
-The \milestoneId{} milestone focuses only on the alert generation part of the system.
-
-Note that we may broadly think of the \product{} as consisting of two independent parts: the Prompt and Offline Processing Services, which provide scheduling and workflow services, and the Science Payloads, which contain the algorithmic content.
-The \milestoneId{} milestone exercises only the science payloads.
-
+The \product{} is that part of the LSST Data Management system which will be responsible for realtime alert distribution and filtering during LSST operations.
+The \milestoneId{} milestone exercises only the distribution and filtering aspects; it does not consider generation of alerts by the LSST Science Pipelines or the user interfaces to the simple filtering service through the LSST Science Platform.
 
 \subsection{Applicable Documents}
 \label{sect:appdocs}
@@ -117,17 +111,19 @@ This test report refers to the execution of tests described in the section \ref{
 \subsection{Hardware}
 \label{sect:hwconf}
 
-Kubernetes Commons at LDF.
+This test activity shall be executed on the Kubernetes Commons at the LDF.
+As discussed in https://dmtn-028.lsst.io/ and https://dmtn-081.lsst.io/, the test machine should have at least 16 cores, 64 GB of memory and access to at least 1.5 TB of shared storage.
 
 \subsection{Software}
 \label{sect:swconf}
 
+This test uses only the code in 
 \url{https://github.com/lsst-dm/alert_stream/} , commit ef3c9e16c42a3265d4f6258ba6983be8b009e7c0
 
 \subsection{Input Data}
 \label{sect:inputdata}
 
-Input data for all tests was based on the DeCAM “HiTS” dataset, as described in \citeds{LDM-533}.
+Input data for all tests was based on simulated alert packets.
 
 \section{Personnel}
 \label{sect:personnel}
@@ -154,7 +150,7 @@ Input data for all tests was based on the DeCAM “HiTS” dataset, as described
 {\bf TEST CASE ID} & {\bf PASS/FAIL} & {\bf COMMENTS} \\\hline
 LVV-T216 & Conditional Pass & {\textit Missing git-lfs in step 2 and 3. Used docker image instead. Remaining steps pass.} \\\hline
 LVV-T217 & Conditional Pass & {\textit Missing git-lfs in step 2 and 3. Used docker image instead. Remaining steps pass.} \\\hline
-LVV-T218 & Conditional Pass & {\textit Missing git-lfs in step 2 and 3. Used docker image instead. Last step result deviated slighlty from the expected result.} \\\hline
+LVV-T218 & Conditional Pass & {\textit Missing git-lfs in step 2 and 3. Used docker image instead. Last step result deviated slightly from the expected result for one consumer.} \\\hline
 \end{longtable}
 
 \subsection{Overall Assessment}
@@ -162,11 +158,17 @@ LVV-T218 & Conditional Pass & {\textit Missing git-lfs in step 2 and 3. Used doc
 
 The test campaign is considered in overall: PASS.
 
-\textit{provide justification}
+Missing elements on the Kubernetes Commons prevented us from building the Docker images in place and using a complete night of unique alerts.
+However, using pre-built Docker images with a smaller, repeated sample of alerts enabled the test to proceed as expected.
 
 
 \subsection{Recommended Improvements}
 \label{sect:recommendations}
+
+Re-execution with the missing components on the Kubernetes Commons.
+
+Examination of the deserialized alerts in the logs is cumbersome and does not allow real verification of the alert content. 
+Improved tools for counting alerts, comparing their contents to the sent alerts, and timing throughput would all improve the utility of this test.
 
 
 
@@ -182,7 +184,7 @@ The test campaign is considered in overall: PASS.
 
 Test Execution Status: CONDITIONAL PASS
 
-Summary: Missing git-lfs in step 2 and 3. Used docker image instead. Remaining steps pass.
+Summary: Missing git-lfs in steps 2 and 3. Used pre-built Docker image instead. Remaining steps pass.
 
 Issues found: none.
 
@@ -321,7 +323,7 @@ topic:full-stream, partition:0, status:end, offset:0, key:None, time:1530674576.
 
 Test Execution Status: CONDITIONAL PASS
 
-Summary: Missing git-lfs in step 2 and 3. Used docker image instead. Last step result deviated slighlty from the expected result.
+Summary: Missing git-lfs in step 2 and 3. Used docker image instead. Last step result deviated sligthly from the expected result for one consumer.
 
 Issues found: none.
 
