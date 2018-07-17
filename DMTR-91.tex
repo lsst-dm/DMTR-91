@@ -413,6 +413,8 @@ Steps Executions Report:
   & Step Status: PASS \\\hline
 5 & Expected Result: Output should be similar to:
 
+\scriptsize{
+\begin{verbatim}
 kubectl get pods
 NAME                        READY     STATUS    RESTARTS   AGE
 kafka-768ddf5564-xwgvh      1/1       Running   0          31s
@@ -422,6 +424,8 @@ kubectl get services
 NAME        TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)     AGE
 kafka       ClusterIP   10.105.19.124   <none>        9092/TCP    6s
 zookeeper   ClusterIP   10.97.110.124   <none>        32181/TCP   2m
+\end{verbatim}
+}
 \\\cline{2-2}
   & Actual Result: \\\cline{2-2}
   & Step Status: PASS \\\hline
