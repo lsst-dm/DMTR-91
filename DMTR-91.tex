@@ -260,7 +260,7 @@ alert packets\\[2\baselineskip]
 
     \paragraph{Test Case LVV-T216 }\mbox{}\\
 
-Open \href{https://jira.lsstcorp.org/secure/Tests.jspa#/testCase/LVV-T216}{test case} in Jira.
+Open  {\it \href{https://jira.lsstcorp.org/secure/Tests.jspa#/testCase/LVV-T216}{test case} } in Jira.
 
     This test will check:\\
 
@@ -469,7 +469,7 @@ zookeeper ~ ClusterIP ~ 10.97.110.124 ~ \textless{}none\textgreater{} ~
 
     \paragraph{Test Case LVV-T217 }\mbox{}\\
 
-Open \href{https://jira.lsstcorp.org/secure/Tests.jspa#/testCase/LVV-T217}{test case} in Jira.
+Open  {\it \href{https://jira.lsstcorp.org/secure/Tests.jspa#/testCase/LVV-T217}{test case} } in Jira.
 
     This test will check that the full stream of LSST alerts can be
 distributed to end users.\\[2\baselineskip]Specifically, this will
@@ -893,7 +893,7 @@ None, `diaSourcesL2': None\}\\[3\baselineskip]
 
     \paragraph{Test Case LVV-T218 }\mbox{}\\
 
-Open \href{https://jira.lsstcorp.org/secure/Tests.jspa#/testCase/LVV-T218}{test case} in Jira.
+Open  {\it \href{https://jira.lsstcorp.org/secure/Tests.jspa#/testCase/LVV-T218}{test case} } in Jira.
 
     This test will demonstrate the ``mini-broker'' filtering service that
 returns a subset of alerts from the full stream identified by
@@ -931,7 +931,7 @@ result deviated sligthly from the expected result for one consumer.
 
       \begin{minipage}[t]{13cm}{\footnotesize
       Download Kafka Docker image from
-https://github.com/lsst-dm/alert\textbackslash{}\_stream.
+https://github.com/lsst-dm/alert\_stream.
 
       \vspace{\dp0}
       } \end{minipage} \\
@@ -961,7 +961,7 @@ https://github.com/lsst-dm/alert\textbackslash{}\_stream.
       Change to the alert\_stream directory and build the docker image.\\
 
 \begin{verbatim}
-docker build -t "lsst-kub001:5000/alert_stream" .
+docker build -t "lsst-kub001:5000/alert_stream"
 \end{verbatim}
 
       \vspace{\dp0}
@@ -1305,25 +1305,8 @@ time:1530675474.542\\
 \{'alertId': 12132024334, `l1dbId': 71776752985092, `diaSource':
 \{'diaSourceId': 73499395056734209, `ccdVisitId': 1020011570,
 `diaObjectId': 71776752985092, `ssObjectId': None,
-\ldots{}\\[2\baselineskip]consumer 3:\\
-topic:Filter021, partition:0, status:end, offset:0, key:None,
-time:1530675385.857\\
-\{'alertId': 12132024334, `l1dbId': 71776752985092, `diaSource':
-\{'diaSourceId': 73499395056734209, `ccdVisitId': 1020011570,
-`diaObjectId': 71776752985092, `ssObjectId':
-None\ldots{}\\[2\baselineskip]consumer 4:\\
-topic:Filter031, partition:0, status:end, offset:0, key:None,
-time:1530675386.571\\
-\{'alertId': 12132024334, `l1dbId': 71776752985092, `diaSource':
-\{'diaSourceId': 73499395056734209, `ccdVisitId': 1020011570,
-`diaObjectId': 71776752985092, `ssObjectId':
-None,\ldots{}\\[2\baselineskip]consumer 5:\\
-topic:Filter041, partition:0, status:end, offset:0, key:None,
-time:1530675387.331\\
-\{'alertId': 12132024334, `l1dbId': 71776752985092, `diaSource':
-\{'diaSourceId': 73499395056734209, `ccdVisitId': 1020011570,
-`diaObjectId': 71776752985092, `ssObjectId':
-None,\ldots{}\\[2\baselineskip]consumer 6:\\
+\ldots{}\\[2\baselineskip](similar results for consumers 3-5,
+7-10)\\[2\baselineskip]consumer 6:\\
 \%3\textbar{}1530675391.040\textbar{}FAIL\textbar{}rdkafka\#consumer-1\textbar{}
 {[}thrd:kafka.alerts-lsst.svc.cluster.local:9092/bootstrap{]}:
 kafka.alerts-lsst.svc.cluster.local:9092/bootstrap: Failed to resolve
@@ -1336,30 +1319,7 @@ kafka.alerts-lsst.svc.cluster.local:9092/bootstrap: Failed to resolve
 resolution\\
 \%3\textbar{}1530675391.040\textbar{}ERROR\textbar{}rdkafka\#consumer-1\textbar{}
 {[}thrd:kafka.alerts-lsst.svc.cluster.local:9092/bootstrap{]}: 1/1
-brokers are down\\[2\baselineskip]consumer 7:\\
-topic:Filter061, partition:0, status:end, offset:0, key:None,
-time:1530675375.359\\
-\{'alertId': 12132024334, `l1dbId': 71776752985092, `diaSource':
-\{'diaSourceId': 73499395056734209, `ccdVisitId': 1020011570,
-`diaObjectId': 71776752985092, `ssObjectId': None,
-`parentDiaSourceId':\ldots{}\\[2\baselineskip]consumer 8:\\
-topic:Filter071, partition:0, status:end, offset:0, key:None,
-time:1530675391.847\\
-\{'alertId': 12132024334, `l1dbId': 71776752985092, `diaSource':
-\{'diaSourceId': 73499395056734209, `ccdVisitId': 1020011570,
-`diaObjectId': 71776752985092, `ssObjectId':
-None\ldots{}\\[2\baselineskip]consumer 9:\\
-topic:Filter081, partition:0, status:end, offset:0, key:None,
-time:1530675375.094\\
-\{'alertId': 12132024334, `l1dbId': 71776752985092, `diaSource':
-\{'diaSourceId': 73499395056734209, `ccdVisitId': 1020011570,
-`diaObjectId': 71776752985092, `ssObjectId':
-None,\ldots{}\\[2\baselineskip]consumer 10:\\
-topic:Filter091, partition:0, status:end, offset:0, key:None,
-time:1530675385.894\\
-\{'alertId': 12132024334, `l1dbId': 71776752985092, `diaSource':
-\{'diaSourceId': 73499395056734209, `ccdVisitId': 1020011570,
-`diaObjectId': 71776752985092, `ssObjectId': None\ldots{}
+brokers are down
 
       \vspace{\dp0}
       } \end{minipage} \\
