@@ -68,24 +68,18 @@ testing.\\[2\baselineskip]
 
 The overall test plan for the LSST Data Management system is described
 in \citeds{LDM-503}.\\
-This document specifically refers to the milestone LDM-503-5, which
-tests the LSST Alert Dis- tribution System.\\
+Success in this test plan is intended to demonstrate completion of the
+milestone LDM-503-05.\\
 The overall LSST Alert Distribution System test specification is defined
-in \citeds{LDM-533}.\\[2\baselineskip]This plan is identified in JIRA as LVV-P1.
-The related test run is LVV-R3 that foresee the execu- tion of the
-following test cases:\\
-LVV-T216(1.0) Installation of the Alert Distribution payloads
-LVV-T217(1.0) Full Stream Alert Distribution\\
-LVV-T218(1.0) Simple Filtering of the LSST Alert
-Stream\\[3\baselineskip]
+in \citeds{LDM-533}.
 
 
 
 \subsection{System Overview}
 \label{sect:systemoverview}
 
-The LSST Alert Distribution System is that part of the LSST Data
-Management system which will be responsible for realtime alert
+The LSST Alert Distribution Service is that part of the LSST Data
+Management System which will be responsible for realtime alert
 distribution and filtering during LSST operations. The LDM-503-5
 milestone exercises only the distribution and filtering aspects; it does
 not consider generation of alerts by the LSST Science Pipelines or the
@@ -94,15 +88,15 @@ Platform.\\[2\baselineskip]
 
 \subsection{Applicable Documents}\label{applicable-documents}
 
-\citeds{LDM-294} LSST DM Project Management Plan\\
-\citeds{LDM-503} DM Test Plan\\
-\citeds{LDM-533} LSST Alert Distribution System Test Specification
+\citeds{LDM-294} Data Management Organization and Management\\
+\citeds{LDM-503} Data Management Test Plan\\
+\citeds{LDM-533} LSST Level 1 System Test Specification
 
 
 \subsection{Document Overview}
 \label{sect:docoverview}
 
-This document is generated from Jira, obtaining the relevant information from the 
+This document was generated from Jira, obtaining the relevant information from the 
 \href{https://jira.lsstcorp.org/secure/Tests.jspa#/testPlan/LVV-P1}{LVV-P1}
 ~Jira Test Plan and related Test Cycles (
   \href{https://jira.lsstcorp.org/secure/Tests.jspa#/testCycle/LVV-C3}{LVV-C3}
@@ -115,7 +109,7 @@ Section \ref{sect:configuration}  describes the configuration used for this test
 Section \ref{sect:personnel} lists all the individuals involved and describes their roles.
 %Section \ref{sect:plannedtestactivities} provides the list of planned test cycles and test cases, including all relevant information that fully describes the test campaign.
 
-Section \ref{sect:overview} provides a summary of the test results, including in an overview in Table \ref{table:summary}, an overall assessment statement and suggestions for possible improvements.
+Section \ref{sect:overview} provides a summary of the test results, including an overview in Table \ref{table:summary}, an overall assessment statement and suggestions for possible improvements.
 Section \ref{sect:detailedtestresults} provides detailed results for each step in each test case.
 
 The current status of test plan LVV-P1 in Jira is Draft.
@@ -198,7 +192,7 @@ result deviated sligthly from the expected result for one consumer.
 \subsection{Overall Assessment}
 \label{sect:overallassessment}
 
-The test campaign is considered in overall:
+The overall result of the test campaign is:
 PASS.\\[2\baselineskip]Missing elements on the Kubernetes Commons
 prevented us from building the Docker images in place and using a
 complete night of unique alerts. However, using pre-built Docker images
