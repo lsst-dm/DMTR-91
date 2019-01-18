@@ -147,9 +147,9 @@ The following personnel are involved in this test activity:
   \item LVV-C3 owner: 
     Eric Bellm
   \begin{itemize}
-    \item Test case LVV-T216 tester: Eric Bellm
-    \item Test case LVV-T217 tester: Eric Bellm
-    \item Test case LVV-T218 tester: Eric Bellm
+    \item Test case \href{https://jira.lsstcorp.org/secure/Tests.jspa#/testCase/LVV-T216}{LVV-T216} tester: Eric Bellm
+    \item Test case \href{https://jira.lsstcorp.org/secure/Tests.jspa#/testCase/LVV-T217}{LVV-T217} tester: Eric Bellm
+    \item Test case \href{https://jira.lsstcorp.org/secure/Tests.jspa#/testCase/LVV-T218}{LVV-T218} tester: Eric Bellm
   \end{itemize}
 \end{itemize}
 \item Additional Test Personnel involved: None
@@ -163,24 +163,25 @@ The following personnel are involved in this test activity:
 \subsection{Summary}
 \label{sect:summarytable}
 
-\begin{longtable} {p{0.2\textwidth}p{0.2\textwidth}p{0.6\textwidth}}
+\begin{longtable}{p{0.12\textwidth}p{0.2\textwidth}p{0.56\textwidth}p{0.12\textwidth}}
 \toprule
-  \multicolumn{3}{c}{ Test Cycle {\bf LVV-C3: LDM-503-5: Alert Distribution Validation }} \\\hline
-  {\bf \footnotesize test case} & {\bf \footnotesize status} & {\bf \footnotesize comment} \\\toprule
+  \multicolumn{3}{c}{ Test Cycle {\bf LVV-C3: LDM-503-5: Alert Distribution Validation
+ }} \\\hline
+  {\bf \footnotesize test case} & {\bf \footnotesize status} & {\bf \footnotesize comment} & {\bf \footnotesize issues} \\\toprule
     \href{https://jira.lsstcorp.org/secure/Tests.jspa#/testCase/LVV-T216}{LVV-T216} 
     & Conditional Pass & Missing git-lfs in steps 2 and 3. Used pre-built Docker image instead.
 Remaining steps pass.
-
+ &
     \\\hline
     \href{https://jira.lsstcorp.org/secure/Tests.jspa#/testCase/LVV-T217}{LVV-T217} 
     & Conditional Pass & Missing git-lfs in step 2. Used docker image instead. Remaining steps
 pass.
-
+ &
     \\\hline
     \href{https://jira.lsstcorp.org/secure/Tests.jspa#/testCase/LVV-T218}{LVV-T218} 
     & Conditional Pass & Missing git-lfs in step 2 and 3. Used docker image instead. Last step
 result deviated sligthly from the expected result for one consumer.
-
+ &
     \\\hline
 
 \caption{Test Results Summary}
@@ -216,9 +217,11 @@ this test.
 
   \subsection{Test Cycle LVV-C3 }
 
-Open test cycle {\it \href{https://jira.lsstcorp.org/secure/Tests.jspa#/testrun/LVV-C3}{LDM-503-5: Alert Distribution Validation}} in Jira.
+Open test cycle {\it \href{https://jira.lsstcorp.org/secure/Tests.jspa#/testrun/LVV-C3}{LDM-503-5: Alert Distribution Validation
+}} in Jira.
 
-  LDM-503-5: Alert Distribution Validation\\
+  LDM-503-5: Alert Distribution Validation
+\\
   Status: Done
 
   Test run with test cases in draft.
@@ -313,6 +316,7 @@ https://github.com/lsst-dm/alert\_stream.
       } \end{minipage} \\
       \\ \cdashline{2-3}
 
+
       & Status          & Pass \\ \hline
 
       2 & Description &
@@ -346,6 +350,7 @@ instead.
       } \end{minipage} \\
       \\ \cdashline{2-3}
 
+
       & Status          & Conditional Pass \\ \hline
 
       3 & Description &
@@ -375,6 +380,7 @@ instead
       \vspace{\dp0}
       } \end{minipage} \\
       \\ \cdashline{2-3}
+
 
       & Status          & Conditional Pass \\ \hline
 
@@ -416,6 +422,7 @@ command)\\[2\baselineskip]
       } \end{minipage} \\
       \\ \cdashline{2-3}
 
+
       & Status          & Pass \\ \hline
 
       5 & Description &
@@ -454,6 +461,7 @@ zookeeper ~ ClusterIP ~ 10.97.110.124 ~ \textless{}none\textgreater{} ~
       \vspace{\dp0}
       } \end{minipage} \\
       \\ \cdashline{2-3}
+
 
       & Status          & Pass \\ \hline
 
@@ -522,6 +530,7 @@ https://github.com/lsst-dm/alert\textbackslash{}\_stream.
       } \end{minipage} \\
       \\ \cdashline{2-3}
 
+
       & Status          & Pass \\ \hline
 
       2 & Description &
@@ -555,6 +564,7 @@ instead
       } \end{minipage} \\
       \\ \cdashline{2-3}
 
+
       & Status          & Conditional Pass \\ \hline
 
       3 & Description &
@@ -584,6 +594,7 @@ instead
       \vspace{\dp0}
       } \end{minipage} \\
       \\ \cdashline{2-3}
+
 
       & Status          & Conditional Pass \\ \hline
 
@@ -624,6 +635,7 @@ command)\\[2\baselineskip]
       } \end{minipage} \\
       \\ \cdashline{2-3}
 
+
       & Status          & Pass \\ \hline
 
       5 & Description &
@@ -662,6 +674,7 @@ zookeeper ~ ClusterIP ~ 10.97.110.124 ~ \textless{}none\textgreater{} ~
       } \end{minipage} \\
       \\ \cdashline{2-3}
 
+
       & Status          & Pass \\ \hline
 
       6 & Description &
@@ -693,6 +706,7 @@ kubectl create -f consumerall-deployment.yaml
       \vspace{\dp0}
       } \end{minipage} \\
       \\ \cdashline{2-3}
+
 
       & Status          & Pass \\ \hline
 
@@ -726,6 +740,7 @@ kubectl create -f sender-deployment.yaml
       \vspace{\dp0}
       } \end{minipage} \\
       \\ \cdashline{2-3}
+
 
       & Status          & Pass \\ \hline
 
@@ -770,6 +785,7 @@ visit: 1573. ~ ~ time: 1530675081.0037167\\[3\baselineskip]
       \vspace{\dp0}
       } \end{minipage} \\
       \\ \cdashline{2-3}
+
 
       & Status          & Pass \\ \hline
 
@@ -880,6 +896,7 @@ None, `diaSourcesL2': None\}\\[3\baselineskip]
       } \end{minipage} \\
       \\ \cdashline{2-3}
 
+
       & Status          & Pass \\ \hline
 
     \end{longtable}
@@ -948,6 +965,7 @@ https://github.com/lsst-dm/alert\_stream.
       } \end{minipage} \\
       \\ \cdashline{2-3}
 
+
       & Status          & Pass \\ \hline
 
       2 & Description &
@@ -981,6 +999,7 @@ instead
       } \end{minipage} \\
       \\ \cdashline{2-3}
 
+
       & Status          & Conditional Pass \\ \hline
 
       3 & Description &
@@ -1010,6 +1029,7 @@ instead
       \vspace{\dp0}
       } \end{minipage} \\
       \\ \cdashline{2-3}
+
 
       & Status          & Conditional Pass \\ \hline
 
@@ -1050,6 +1070,7 @@ command)\\[2\baselineskip]
       } \end{minipage} \\
       \\ \cdashline{2-3}
 
+
       & Status          & Pass \\ \hline
 
       5 & Description &
@@ -1087,6 +1108,7 @@ zookeeper ~ ClusterIP ~ 10.97.110.124 ~ \textless{}none\textgreater{} ~
       \vspace{\dp0}
       } \end{minipage} \\
       \\ \cdashline{2-3}
+
 
       & Status          & Pass \\ \hline
 
@@ -1129,6 +1151,7 @@ kubectl create -f consumer10-deployment.yaml
       } \end{minipage} \\
       \\ \cdashline{2-3}
 
+
       & Status          & Pass \\ \hline
 
       7 & Description &
@@ -1164,6 +1187,7 @@ kubectl create -f filterer5-deployment.yaml
       } \end{minipage} \\
       \\ \cdashline{2-3}
 
+
       & Status          & Pass \\ \hline
 
       8 & Description &
@@ -1195,6 +1219,7 @@ kubectl create -f sender-deployment.yaml
       \vspace{\dp0}
       } \end{minipage} \\
       \\ \cdashline{2-3}
+
 
       & Status          & Pass \\ \hline
 
@@ -1241,6 +1266,7 @@ visit: 1574. ~ ~ time: 1530675783.0040474\\[3\baselineskip]
       \vspace{\dp0}
       } \end{minipage} \\
       \\ \cdashline{2-3}
+
 
       & Status          & Pass \\ \hline
 
@@ -1319,6 +1345,7 @@ brokers are down
       \vspace{\dp0}
       } \end{minipage} \\
       \\ \cdashline{2-3}
+
 
       & Status          & Conditional Pass \\ \hline
 
