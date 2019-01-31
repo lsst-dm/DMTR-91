@@ -1,141 +1,158 @@
-\documentclass[DM,lsstdraft,STR,toc]{lsstdoc}
+\documentclass[DM,STR,toc]{lsstdoc}
+\usepackage{geometry}
+\usepackage{longtable,booktabs}
+\usepackage{enumitem}
+\usepackage{arydshln}
 
 \input meta.tex
+
+\providecommand{\tightlist}{
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 \begin{document}
 
 \def\milestoneName{Alert Distribution Validation}
-\def\milestoneId{LDM-503-5}
-\def\product{LSST Alert Distribution System}
+\def\milestoneId{LDM-503-5:}
+\def\product{Prompt}
 
 \setDocCompact{true}
 
-\title[\milestoneId{}~Test Report]{\milestoneId{} (\milestoneName{})~Test Report}
+\title[\milestoneId{}~Test Report]{\milestoneId{} (\milestoneName{})~Test Plan and Report}
 \setDocRef{\lsstDocType-\lsstDocNum}
-\setDocDate{\vcsdate}
+\setDocDate{2019-01-30}
 \setDocUpstreamLocation{\url{https://github.com/lsst/lsst-texmf/examples}}
-\author{% `git log --pretty=%an | sort --key=2 | uniq` ?
-  Eric Bellm
-}
+\author{ Eric Bellm }
 
-% Most recent last
-\setDocChangeRecord{
-\addtohist{}{2018-07-16}{Initial version.}{Belm, Comoretto}
-}
-
-\setDocCurator{Eric Bellm}
-\setDocUpstreamLocation{\url{https://github.com/lsst-dm/\lsstDocType-\lsstDocNum}}
-\setDocUpstreamVersion{\vcsrevision}
+\input history_and_info.tex
 
 
 \setDocAbstract{
-This is the test report for \milestoneId{} (\milestoneName{}), an LSST DM level 1 milestone pertaining to the \product{}.
+This is the test plan and report for \milestoneId{} (\milestoneName{}), an LSST level 2 milestone pertaining to the Data Management Subsystem.
 }
+
 
 \maketitle
 
 \section{Introduction}
 \label{sect:intro}
 
+
 \subsection{Objectives}
 \label{sect:objectives}
 
-This test activity demonstrates the successful execution of the major components of the Alert Distribution system at the scale of LSST Operations.
+This test activity demonstrates the successful execution of the major
+components of the Alert Distribution system at the scale of LSST
+Operations.\\[2\baselineskip]It will demonstrate that:\\
 
-It will demonstrate that:
 \begin{itemize}
-\item The Alert Distribution payloads can be made available on systems managed by the LSST Data Facility
-\item The Alert Distribution payloads can be executed under the control of the relevant LDF services
-\item All required science data products can be passed through the components of the alert distribution service.
+\tightlist
+\item
+  The Alert Distribution payloads can be made available on systems
+  managed by the LSST Data Facility
+\item
+  The Alert Distribution payloads can be executed under the control of
+  the relevant LDF services
+\item
+  All required science data products can be passed through the
+  components of the alert distribution service.
 \end{itemize}
 
-Note that this test plan does not extend to testing integration of the Alert Distribution System with the Alert Generation Science Pipeline or the LSST Science Platform.
-We also do not test the Alert Database at this time as its functional requirements are not sufficiently specified to enable testing.
+Note that this test plan does not extend to testing integration of the
+Alert Distribution System with the Alert Generation Science Pipeline or
+the LSST Science Platform.\\
+We also do not test the Alert Database at this time as its functional
+requirements are not sufficiently specified to enable
+testing.\\[2\baselineskip]
 
-\subsection{Scope}
-\label{sect:scope}
+\subsection{Scope}\label{scope}
 
-The overall test plan for the LSST Data Management system is described in \citeds{LDM-503}.
+The overall test plan for the LSST Data Management system is described
+in \citeds{LDM-503}.\\
+Success in this test plan is intended to demonstrate completion of the
+milestone LDM-503-05.\\
+The overall LSST Alert Distribution System test specification is defined
+in \citeds{LDM-533}.
 
-This document specifically refers to the milestone \milestoneId{}, which tests the \product{}.
 
-The overall \product{} test specification is defined in \citeds{LDM-533}.
-
-This plan is identified in JIRA as LVV-P1. The related test run is LVV-R3 that foresee the 
-execution of the following test cases:
-
-\begin{description}
-
-  \item[LVV-T216(1.0)]{Installation of the Alert Distribution payloads}
-  \item[LVV-T217(1.0)]{Full Stream Alert Distribution}
-  \item[LVV-T218(1.0)]{Simple Filtering of the LSST Alert Stream}
-
-\end{description}
 
 \subsection{System Overview}
 \label{sect:systemoverview}
 
-The \product{} is that part of the LSST Data Management system which will be responsible for realtime alert distribution and filtering during LSST operations.
-The \milestoneId{} milestone exercises only the distribution and filtering aspects; it does not consider generation of alerts by the LSST Science Pipelines or the user interfaces to the simple filtering service through the LSST Science Platform.
+The LSST Alert Distribution Service is that part of the LSST Data
+Management System which will be responsible for realtime alert
+distribution and filtering during LSST operations. The LDM-503-5
+milestone exercises only the distribution and filtering aspects; it does
+not consider generation of alerts by the LSST Science Pipelines or the
+user interfaces to the simple filtering service through the LSST Science
+Platform.\\[2\baselineskip]
 
-\subsection{Applicable Documents}
-\label{sect:appdocs}
-\addtocounter{table}{-1}
+\subsection{Applicable Documents}\label{applicable-documents}
 
-\begin{tabular}[htb]{l l}
-\citeds{LDM-294} & LSST DM Project Management Plan\\
-\citeds{LDM-503} & DM Test Plan\\
-\citeds{LDM-533} & \product{} Test Specification\\
-\end{tabular}
+\citeds{LDM-294} Data Management Organization and Management\\
+\citeds{LDM-503} Data Management Test Plan\\
+\citeds{LDM-533} LSST Level 1 System Test Specification
 
-\subsection{References}
-\label{sect:references}
-
-\renewcommand{\refname}{}
-\bibliography{lsst,refs,books,refs_ads}
 
 \subsection{Document Overview}
 \label{sect:docoverview}
 
-Section \ref{sect:configuration} of this document provides details of the \product{} baseline used for this test, including relevant hardware and software configurations.
-Section \ref{sect:personnel} lists the individuals involved in performing the tests.
-Section \ref{sect:overview} provides an overview of the test results, while Section \ref{sect:detailed} provides more detailed results from each individual test case.
+This document was generated from Jira, obtaining the relevant information from the 
+\href{https://jira.lsstcorp.org/secure/Tests.jspa#/testPlan/LVV-P1}{LVV-P1}
+~Jira Test Plan and related Test Cycles (
+  \href{https://jira.lsstcorp.org/secure/Tests.jspa#/testCycle/LVV-C3}{LVV-C3}
+).
 
+Section \ref{sect:intro} provides an overview of the test campaign, the system under test (\product{}), the applicable documentation, and explains how this document is organized.
+Section \ref{sect:configuration}  describes the configuration used for this test.
+Section \ref{sect:personnel} describes the necessary roles and lists the individuals assigned to them.
+%Section \ref{sect:plannedtestactivities} provides the list of planned test cycles and test cases, including all relevant information that fully describes the test campaign.
+
+Section \ref{sect:overview} provides a summary of the test results, including an overview in Table \ref{table:summary}, an overall assessment statement and suggestions for possible improvements.
+Section \ref{sect:detailedtestresults} provides detailed results for each step in each test case.
+
+The current status of test plan LVV-P1 in Jira is Completed.
+
+\subsection{References}
+\label{sect:references}
+\renewcommand{\refname}{}
+\bibliography{lsst,refs,books,refs_ads}
 \section{Test Configuration}
 \label{sect:configuration}
 
-\subsection{Documents}
+\subsection{Data Collection}
 
-This test report refers to the execution of tests described in the section \ref{sect:scope} and documented in the \citeds{LDM-533} test specification issue 2.0.
+  Observing is not required for this test campaign.
 
-\subsection{Hardware}
+\subsection{Verification Environment}
 \label{sect:hwconf}
+  This test activity shall be executed on the Kubernetes Commons at the
+LDF.\\
+As discussed in https://dmtn-028.lsst.io/ and https://dmtn-081.lsst.io/,
+the test machine should have at least 16 cores, 64 GB of memory and
+access to at least 1.5 TB of shared storage.
 
-This test activity shall be executed on the Kubernetes Commons at the LDF.
-As discussed in https://dmtn-028.lsst.io/ and https://dmtn-081.lsst.io/, the test machine should have at least 16 cores, 64 GB of memory and access to at least 1.5 TB of shared storage.
 
-\subsection{Software}
-\label{sect:swconf}
 
-This test uses only the code in
- 
-\url{https://github.com/lsst-dm/alert_stream/} , commit ef3c9e16c42a3265d4f6258ba6983be8b009e7c0
 
-\subsection{Input Data}
-\label{sect:inputdata}
-
-Input data for all tests was based on simulated alert packets.
 
 \section{Personnel}
 \label{sect:personnel}
 
+The following personnel are involved in this test activity:
+
 \begin{itemize}
-\item Test Plan (LVV-P1) Owner: Eric Bellm
-\item Test Run (LVV-R3) Owner: Eric Bellm
-\item LVV-T216 Tester: Eric Bellm
-\item LVV-T217 Tester: Eric Bellm
-\item LVV-T218 Tester: Eric Bellm
-\item Additional Test Personel involved: None 
+\item Test Plan (LVV-P1) owner: Eric Bellm
+\item Test Cycles:
+\begin{itemize}
+  \item LVV-C3 owner: 
+    Eric Bellm
+  \begin{itemize}
+    \item Test case \href{https://jira.lsstcorp.org/secure/Tests.jspa#/testCase/LVV-T216}{LVV-T216} tester: Eric Bellm
+    \item Test case \href{https://jira.lsstcorp.org/secure/Tests.jspa#/testCase/LVV-T217}{LVV-T217} tester: Eric Bellm
+    \item Test case \href{https://jira.lsstcorp.org/secure/Tests.jspa#/testCase/LVV-T218}{LVV-T218} tester: Eric Bellm
+  \end{itemize}
+\end{itemize}
+\item Additional Test Personnel involved: None
 \end{itemize}
 
 \newpage
@@ -143,422 +160,1196 @@ Input data for all tests was based on simulated alert packets.
 \section{Overview of the Test Results}
 \label{sect:overview}
 
-\subsection{Summary Table}
+\subsection{Summary}
 \label{sect:summarytable}
 
+\begin{longtable}{p{0.12\textwidth}p{0.2\textwidth}p{0.56\textwidth}p{0.12\textwidth}}
+\toprule
+  \multicolumn{3}{c}{ Test Cycle {\bf LVV-C3: LDM-503-5: Alert Distribution Validation
+ }} \\\hline
+  {\bf \footnotesize test case} & {\bf \footnotesize status} & {\bf \footnotesize comment} & {\bf \footnotesize issues} \\\toprule
+    \href{https://jira.lsstcorp.org/secure/Tests.jspa#/testCase/LVV-T216}{LVV-T216} 
+    & Conditional Pass & Missing git-lfs in steps 2 and 3. Used pre-built Docker image instead.
+Remaining steps pass.
+ &
+    \\\hline
+    \href{https://jira.lsstcorp.org/secure/Tests.jspa#/testCase/LVV-T217}{LVV-T217} 
+    & Conditional Pass & Missing git-lfs in step 2. Used docker image instead. Remaining steps
+pass.
+ &
+    \\\hline
+    \href{https://jira.lsstcorp.org/secure/Tests.jspa#/testCase/LVV-T218}{LVV-T218} 
+    & Conditional Pass & Missing git-lfs in step 2 and 3. Used docker image instead. Last step
+result deviated sligthly from the expected result for one consumer.
+ &
+    \\\hline
 
-\begin{longtable} {|p{0.2\textwidth}|p{0.2\textwidth}|p{0.6\textwidth}|}\hline
-{\bf TEST CASE ID} & {\bf PASS/FAIL} & {\bf COMMENTS} \\\hline
-LVV-T216 & Conditional Pass & {\textit Missing git-lfs in step 2 and 3. Used docker image instead. Remaining steps pass.} \\\hline
-LVV-T217 & Conditional Pass & {\textit Missing git-lfs in step 2 and 3. Used docker image instead. Remaining steps pass.} \\\hline
-LVV-T218 & Conditional Pass & {\textit Missing git-lfs in step 2 and 3. Used docker image instead. Last step result deviated slightly from the expected result for one consumer.} \\\hline
+\caption{Test Results Summary}
+\label{table:summary}
 \end{longtable}
 
 \subsection{Overall Assessment}
 \label{sect:overallassessment}
 
-The test campaign is considered in overall: PASS.
-
-Missing elements on the Kubernetes Commons prevented us from building the Docker images in place and using a complete night of unique alerts.
-However, using pre-built Docker images with a smaller, repeated sample of alerts enabled the test to proceed as expected.
+The overall result of the test campaign is:
+PASS.\\[2\baselineskip]Missing elements on the Kubernetes Commons
+prevented us from building the Docker images in place and using a
+complete night of unique alerts. However, using pre-built Docker images
+with a smaller, repeated sample of alerts enabled the test to proceed as
+expected.
 
 
 \subsection{Recommended Improvements}
 \label{sect:recommendations}
 
-Re-execution with the missing components on the Kubernetes Commons.
-
-Examination of the deserialized alerts in the logs is cumbersome and does not allow real verification of the alert content. 
-Improved tools for counting alerts, comparing their contents to the sent alerts, and timing throughput would all improve the utility of this test.
-
-
+Re-execution with the missing components on the Kubernetes
+Commons.\\[2\baselineskip]Examination of the deserialized alerts in the
+logs is cumbersome and does not allow real verification of the alert
+content. Improved tools for counting alerts, comparing their contents to
+the sent alerts, and timing throughput would all improve the utility of
+this test.
 
 
 \newpage
-
 \section{Detailed Test Results}
-\label{sect:detailed}
+\label{sect:detailedtestresults}
 
 
-\subsection{LVV-T216(1.0): Installation of the Alert Distribution payloads}
-\label{sect:detail-lvv-t216}
+  \subsection{Test Cycle LVV-C3 }
 
-Test Execution Status: CONDITIONAL PASS
+Open test cycle {\it \href{https://jira.lsstcorp.org/secure/Tests.jspa#/testrun/LVV-C3}{LDM-503-5: Alert Distribution Validation
+}} in Jira.
 
-Summary: Missing git-lfs in steps 2 and 3. Used pre-built Docker image instead. Remaining steps pass.
+  LDM-503-5: Alert Distribution Validation
+\\
+  Status: Done
 
-Issues found: none.
+  Test run with test cases in draft.
 
-Steps Executions Report:
 
-\begin{longtable}{p{2cm}p{14cm}}
-\hline
-{Step} & {Actual Results and Status}\\ \hline
-1 & Expected Result: Runs without error \\\cline{2-2}
-  & Actual REsult: runs without error \\\cline{2-2}
-  & Step Status: PASS \\\hline
-2 & Expected Result: Runs without error \\\cline{2-2}
-  & Actual Result: Did not execute because of missing git-lfs; used pre-built Docker image instead. \\\cline{2-2}
-  & Step Status: CONDITIONAL PASS \\\hline
-3 & Expected Result: Runs without error \\\cline{2-2}
-  & Actual Result: Did not execute because of missing git-lfs; used pre-built Docker image instead \\\cline{2-2}
-  & Step Status: CONDITIONAL PASS \\\hline
-4 & Expected Result: Runs without error \\\cline{2-2}
-  & Actual Result: \\\cline{2-2}
-  & Step Status: PASS \\\hline
-5 & Expected Result: Output should be similar to:
+  \subsubsection{Software Version/Baseline}
+    This test uses only the code in\\
+https://github.com/lsst-dm/alert\_stream/ , commit
+ef3c9e16c42a3265d4f6258ba6983be8b009e7c0
 
-\scriptsize{
+
+  \subsubsection{Configuration}
+    \textbf{Documents}\\[2\baselineskip]This test report refers to the
+execution of tests described in the section 1.2 and documented in the
+\citeds{LDM-533} test specification issue
+2.0.\\[2\baselineskip]\textbf{Hardware}\\[2\baselineskip]This test
+activity shall be executed on the Kubernetes Commons at the LDF. As
+discussed in https://dmtn-028.lsst.io/ and https://dmtn-081.lsst.io/,
+the test machine should have at least 16 cores, 64 GB of memory and
+access to at least 1.5 TB of shared
+storage.\\[2\baselineskip]\textbf{Software}\\[2\baselineskip]This test
+uses only the code in\\
+https://github.com/lsst-dm/alert\_stream/ , commit
+ef3c9e16c42a3265d4f6258ba6983be8b009e7c0\\[2\baselineskip]\textbf{Input
+Data}\\[2\baselineskip]Input data for all tests was based on simulated
+alert packets\\[2\baselineskip]
+
+
+  \subsubsection{Test Cases in LVV-C3 Test Cycle}
+
+
+    \paragraph{Test Case LVV-T216 }\mbox{}\\
+
+Open  \href{https://jira.lsstcorp.org/secure/Tests.jspa#/testCase/LVV-T216}{\textit{ LVV-T216 } }
+test case in Jira.
+
+    This test will check:\\
+
+\begin{itemize}
+\tightlist
+\item
+  That the Alert Distribution payloads are available from documented
+  channels.
+\item
+  That the Alert Distribution payloads can be installed on LSST Data
+  Facility-managed systems.
+\item
+  That the Alert Distribution payloads can be executed by LSST Data
+  Facility-managed systems.
+\end{itemize}
+
+
+    {\bf Preconditions}:\\
+    
+
+    Execution status: {\bf Conditional Pass }
+
+    Final comment:\\Missing git-lfs in steps 2 and 3. Used pre-built Docker image instead.
+Remaining steps pass.
+
+
+
+    Detailed step results:
+
+    \begin{longtable}{p{1cm}p{2cm}p{13cm}}
+    \hline
+    {Step} & \multicolumn{2}{c}{Description, Results and Status}\\ \hline
+      1 & Description &
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Download Kafka Docker image from
+https://github.com/lsst-dm/alert\_stream.
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & Expected Result & 
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Runs without error
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & \begin{minipage}[t]{2cm}{Actual\\ Result}\end{minipage}   & 
+      \begin{minipage}[t]{13cm}{\footnotesize
+      runs without error
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+
+      & Status          & Pass \\ \hline
+
+      2 & Description &
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Change to the alert\_stream directory and build the docker image.\\
+
 \begin{verbatim}
-kubectl get pods
-NAME                        READY     STATUS    RESTARTS   AGE
-kafka-768ddf5564-xwgvh      1/1       Running   0          31s
-zookeeper-f798cc548-mgkpn   1/1       Running   0          1m
-
-kubectl get services
-NAME        TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)     AGE
-kafka       ClusterIP   10.105.19.124   <none>        9092/TCP    6s
-zookeeper   ClusterIP   10.97.110.124   <none>        32181/TCP   2m
+docker build -t "lsst-kub001:5000/alert_stream" .
 \end{verbatim}
-}
 
-\\\cline{2-2}
-  & Actual Result: as expected \\\cline{2-2}
-  & Step Status: PASS \\\hline
-\end{longtable}
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & Expected Result & 
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Runs without error
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & \begin{minipage}[t]{2cm}{Actual\\ Result}\end{minipage}   & 
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Did not execute because of missing git-lfs; used pre-built Docker image
+instead.
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
 
 
-\subsection{LVV-T217(1.0: Full Stream Alert Distribution}
-\label{sect:detail-lvv-t216}
+      & Status          & Conditional Pass \\ \hline
 
-Test Execution Status: CONDITIONAL PASS
+      3 & Description &
 
-Summary: Missing git-lfs in step 2. Used docker image instead. Remaining steps pass.
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Register it with Kubernetes\\[2\baselineskip]docker push
+lsst-kub001:5000/alert\_stream
 
-Issues found: none.
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
 
-Steps Executions Report:
+      & Expected Result & 
 
-\begin{longtable}{p{2cm}p{14cm}}
-\hline
-{Step} & {Actual Results and Status}\\ \hline
-1 & Expected Result: Runs without error \\\cline{2-2}
-  & Actual REsult: runs without error \\\cline{2-2}
-  & Step Status: PASS \\\hline
-2 & Expected Result: Runs without error \\\cline{2-2}
-  & Actual Result: Did not execute because of missing git-lfs; used pre-built Docker image instead. \\\cline{2-2}
-  & Step Status: CONDITIONAL PASS \\\hline
-3 & Expected Result: Runs without error \\\cline{2-2}
-  & Actual Result: Did not execute because of missing git-lfs; used pre-built Docker image instead \\\cline{2-2}
-  & Step Status: CONDITIONAL PASS \\\hline
-4 & Expected Result: Runs without error \\\cline{2-2}
-  & Actual Result: \\\cline{2-2}
-  & Step Status: PASS \\\hline
-5 & Expected Result: Output should be similar to:
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Runs without error
 
-\scriptsize{
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & \begin{minipage}[t]{2cm}{Actual\\ Result}\end{minipage}   & 
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Did not execute because of missing git-lfs; used pre-built Docker image
+instead
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+
+      & Status          & Conditional Pass \\ \hline
+
+      4 & Description &
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      From the alert\_stream/kubernetes directory, start Kafka and
+Zookeeper:\\[2\baselineskip]
+
 \begin{verbatim}
-kubectl get pods
-NAME                        READY     STATUS    RESTARTS   AGE
-kafka-768ddf5564-xwgvh      1/1       Running   0          31s
-zookeeper-f798cc548-mgkpn   1/1       Running   0          1m
-
-kubectl get services
-NAME        TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)     AGE
-kafka       ClusterIP   10.105.19.124   <none>        9092/TCP    6s
-zookeeper   ClusterIP   10.97.110.124   <none>        32181/TCP   2m
+kubectl create -f zookeeper-service.yaml
+kubectl create -f zookeeper-deployment.yaml
+kubectl create -f kafka-deployment.yaml
+kubectl create -f kafka-service.yaml
 \end{verbatim}
-}
-\\\cline{2-2}
-  & Actual Result: \\\cline{2-2}
-  & Step Status: PASS \\\hline
-6 & Expected Result: Runs without error \\\cline{2-2}
-  & Actual Result: \\\cline{2-2}
-  & Step Status: PASS \\\hline
-7 & Expected Result: Runs without error \\\cline{2-2}
-  & Actual Result: \\\cline{2-2}
-  & Step Status: PASS \\\hline
-8 & Expected Result: Similar to
 
-\scriptsize{
+(use kubectl get pods/services between each command to check status;
+wait until each is ``Running'' before starting the next
+command)\\[2\baselineskip]
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & Expected Result & 
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Runs without error
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & \begin{minipage}[t]{2cm}{Actual\\ Result}\end{minipage}   & 
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Runs without error\\[2\baselineskip]
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+
+      & Status          & Pass \\ \hline
+
+      5 & Description &
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Confirm Kafka and Zookeeper are listed when
+running\\[2\baselineskip]kubectl get
+pods\\[2\baselineskip]and\\[2\baselineskip]kubectl get services
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & Expected Result & 
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Output should be similar to:\\[2\baselineskip]kubectl get pods\\
+NAME ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~READY ~ ~ STATUS ~ ~RESTARTS ~ AGE\\
+kafka-768ddf5564-xwgvh ~ ~ ~1/1 ~ ~ ~ Running ~ 0 ~ ~ ~ ~ ~31s\\
+zookeeper-f798cc548-mgkpn ~ 1/1 ~ ~ ~ Running ~ 0 ~ ~ ~ ~
+~1m\\[2\baselineskip]kubectl get services\\
+NAME ~ ~ ~ ~TYPE ~ ~ ~ ~CLUSTER-IP ~ ~ ~EXTERNAL-IP ~ PORT(S) ~ ~ AGE\\
+kafka ~ ~ ~ ClusterIP ~ 10.105.19.124 ~ \textless{}none\textgreater{} ~
+~ ~ ~9092/TCP ~ ~6s\\
+zookeeper ~ ClusterIP ~ 10.97.110.124 ~ \textless{}none\textgreater{} ~
+~ ~ ~32181/TCP ~ 2m
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & \begin{minipage}[t]{2cm}{Actual\\ Result}\end{minipage}   & 
+      \begin{minipage}[t]{13cm}{\footnotesize
+      as expected
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+
+      & Status          & Pass \\ \hline
+
+    \end{longtable}
+
+
+    \paragraph{Test Case LVV-T217 }\mbox{}\\
+
+Open  \href{https://jira.lsstcorp.org/secure/Tests.jspa#/testCase/LVV-T217}{\textit{ LVV-T217 } }
+test case in Jira.
+
+    This test will check that the full stream of LSST alerts can be
+distributed to end users.\\[2\baselineskip]Specifically, this will
+demonstrate that:
+
+\begin{itemize}
+\tightlist
+\item
+  Serialized alert packets can be loaded into the alert distribution
+  system at LSST-relevant scales (10,000 alerts every 39 seconds);
+\item
+  Alert packets can be retrieved from the queue system at LSST-relevant
+  scales.
+\end{itemize}
+
+
+    {\bf Preconditions}:\\
+    Input data: A sample of Avro-formatted alert packets.
+
+
+    Execution status: {\bf Conditional Pass }
+
+    Final comment:\\Missing git-lfs in step 2. Used docker image instead. Remaining steps
+pass.
+
+
+
+    Detailed step results:
+
+    \begin{longtable}{p{1cm}p{2cm}p{13cm}}
+    \hline
+    {Step} & \multicolumn{2}{c}{Description, Results and Status}\\ \hline
+      1 & Description &
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Download Kafka Docker image from
+https://github.com/lsst-dm/alert\textbackslash{}\_stream.
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & Expected Result & 
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Runs without error
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & \begin{minipage}[t]{2cm}{Actual\\ Result}\end{minipage}   & 
+      \begin{minipage}[t]{13cm}{\footnotesize
+      
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+
+      & Status          & Pass \\ \hline
+
+      2 & Description &
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Change to the alert\_stream directory and build the docker image.\\
+
 \begin{verbatim}
-kubectl logs sender-7d6f98586f-nhwfj
-visit: 1570.     time: 1530588618.0313473
-visits finished: 1      time: 1530588653.5614944
-visit: 1571.     time: 1530588657.0087624
-visits finished: 2      time: 1530588692.506188
-visit: 1572.     time: 1530588696.0051727
-visits finished: 3      time: 1530588731.5900314
+docker build -t "lsst-kub001:5000/alert_stream" .
 \end{verbatim}
-}
- \\\cline{2-2}
-  & Actual Result: 
 
-\scriptsize{
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & Expected Result & 
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Runs without error
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & \begin{minipage}[t]{2cm}{Actual\\ Result}\end{minipage}   & 
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Did not execute because of missing git-lfs; used pre-built Docker image
+instead
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+
+      & Status          & Conditional Pass \\ \hline
+
+      3 & Description &
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Register it with Kubernetes\\[2\baselineskip]docker push
+lsst-kub001:5000/alert\_stream
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & Expected Result & 
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Runs without error
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & \begin{minipage}[t]{2cm}{Actual\\ Result}\end{minipage}   & 
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Did not execute because of missing git-lfs; used pre-built Docker image
+instead
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+
+      & Status          & Conditional Pass \\ \hline
+
+      4 & Description &
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      From the alert\_stream/kubernetes directory, start Kafka and
+Zookeeper:\\[2\baselineskip]
+
 \begin{verbatim}
-visit: 1570.     time: 1530674964.0035944
-visits finished: 1      time: 1530675000.5279133
-visit: 1571.     time: 1530675003.00461
-visits finished: 2      time: 1530675039.5390277
-visit: 1572.     time: 1530675042.005049
-visits finished: 3      time: 1530675078.4921534
-visit: 1573.     time: 1530675081.0037167
+kubectl create -f zookeeper-service.yaml
+kubectl create -f zookeeper-deployment.yaml
+kubectl create -f kafka-deployment.yaml
+kubectl create -f kafka-service.yaml
 \end{verbatim}
-}
 
-\\\cline{2-2}
-  & Step Status: PASS \\\hline
-9 & Expected Result: Similar to:
+(use kubectl get pods/services between each command to check status;
+wait until each is ``Running'' before starting the next
+command)\\[2\baselineskip]
 
-\scriptsize{
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & Expected Result & 
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Runs without error
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & \begin{minipage}[t]{2cm}{Actual\\ Result}\end{minipage}   & 
+      \begin{minipage}[t]{13cm}{\footnotesize
+      
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+
+      & Status          & Pass \\ \hline
+
+      5 & Description &
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Confirm Kafka and Zookeeper are listed when
+running\\[2\baselineskip]kubectl get
+pods\\[2\baselineskip]and\\[2\baselineskip]kubectl get services
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & Expected Result & 
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Output should be similar to:\\[2\baselineskip]kubectl get pods\\
+NAME ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~READY ~ ~ STATUS ~ ~RESTARTS ~ AGE\\
+kafka-768ddf5564-xwgvh ~ ~ ~1/1 ~ ~ ~ Running ~ 0 ~ ~ ~ ~ ~31s\\
+zookeeper-f798cc548-mgkpn ~ 1/1 ~ ~ ~ Running ~ 0 ~ ~ ~ ~
+~1m\\[2\baselineskip]kubectl get services\\
+NAME ~ ~ ~ ~TYPE ~ ~ ~ ~CLUSTER-IP ~ ~ ~EXTERNAL-IP ~ PORT(S) ~ ~ AGE\\
+kafka ~ ~ ~ ClusterIP ~ 10.105.19.124 ~ \textless{}none\textgreater{} ~
+~ ~ ~9092/TCP ~ ~6s\\
+zookeeper ~ ClusterIP ~ 10.97.110.124 ~ \textless{}none\textgreater{} ~
+~ ~ ~32181/TCP ~ 2m
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & \begin{minipage}[t]{2cm}{Actual\\ Result}\end{minipage}   & 
+      \begin{minipage}[t]{13cm}{\footnotesize
+      
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+
+      & Status          & Pass \\ \hline
+
+      6 & Description &
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Start a consumer that monitors the full stream and logs a deserialized
+version of every Nth packet:\\
+
 \begin{verbatim}
-{'alertId': 12132024420, 'l1dbId': 71776805594116, 'diaSource': {'diaSourceId':
-73499448928374785, 'ccdVisitId': 2020011570, 'diaObjectId': 71776805594116, 'ssO
-bjectId': None, 'parentDiaSourceId': None, 'midPointTai': 59595.37041, 'filterNa
-me': 'y', 'ra': 172.24912810036074, 'decl': -80.64214929176521, 'ra_decl_Cov': {
-'raSigma': 0.0003428002819418907, 'declSigma': 0.00027273103478364646, 'ra_decl_
-Cov': 0.000628734880592674}, 'x': 2979.08837890625, 'y': 3843.328857421875, 'x_y
-_Cov': {'xSigma': 0.6135467886924744, 'ySigma': 0.77132648229599, 'x_y_Cov': 0.0
-007463791407644749}, 'apFlux': None, 'apFluxErr': None, 'snr': 0.366516500711441
-04, 'psFlux': 7.698232025177276e-07, 'psRa': None, 'psDecl': None, 'ps_Cov': Non
-e, 'psLnL': None, 'psChi2': None, 'psNdata': None, 'trailFlux': None, 'trailRa':
+kubectl create -f consumerall-deployment.yaml
 \end{verbatim}
-}
 
- \\\cline{2-2}
-  & Actual Result: 
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
 
-\scriptsize{
-\begin{verbatim}
-topic:full-stream, partition:0, status:end, offset:0, key:None, time:1530674576.589
-{'alertId': 12132024420, 'l1dbId': 71776805594116, 'diaSource': {'diaSourceId': 734
-99448928374785, 'ccdVisitId': 2020011570, 'diaObjectId': 71776805594116, 'ssObjectI
-d': None, 'parentDiaSourceId': None, 'midPointTai': 59595.37041, 'filterName': 'y',
- 'ra': 172.24912810036074, 'decl': -80.64214929176521, 'ra_decl_Cov': {'raSigma': 0
-.0003428002819418907, 'declSigma': 0.00027273103478364646, 'ra_decl_Cov': 0.0006287
-34880592674}, 'x': 2979.08837890625, 'y': 3843.328857421875, 'x_y_Cov': {'xSigma': 
-0.6135467886924744, 'ySigma': 0.77132648229599, 'x_y_Cov': 0.0007463791407644749}, 
-'apFlux': None, 'apFluxErr': None, 'snr': 0.36651650071144104, 'psFlux': 7.69823202
-5177276e-07, 'psRa': None, 'psDecl': None, 'ps_Cov': None, 'psLnL': None, 'psChi2':
- None, 'psNdata': None, 'trailFlux': None, 'trailRa': None, 'trailDecl': None, 'tra
-ilLength': None, 'trailAngle': None, 'trail_Cov': None, 'trailLnL': None, 'trailChi
-2': None, 'trailNdata': None, 'dipMeanFlux': None, 'dipFluxDiff': None, 'dipRa': No
-ne, 'dipDecl': None, 'dipLength': None, 'dipAngle': None, 'dip_Cov': None, 'dipLnL'
-: None, 'dipChi2': None, 'dipNdata': None, 'totFlux': 7.267262844834477e-06, 'totFl
-uxErr': 1.990927557926625e-06, 'diffFlux': 7.698232025177276e-07, 'diffFluxErr': 2.
-1003779693273827e-06, 'fpBkgd': None, 'fpBkgdErr': None, 'ixx': None, 'iyy': None, 
-'ixy': None, 'i_cov': None, 'ixxPSF': None, 'iyyPSF': None, 'ixyPSF': None, 'extend
-edness': None, 'spuriousness': None, 'flags': 516}, 'prv_diaSources': None, 'diaObj
-ect': {'diaObjectId': 71776805594116, 'ra': 172.249128110081, 'decl': -80.642149291
-71955, 'ra_decl_Cov': {'raSigma': 0.0003098504093941301, 'declSigma': 0.00013097454
-21167463, 'ra_decl_Cov': 0.0007125047268345952}, 'radecTai': 59595.139501, 'pmRa': 
--9.0, 'pmDecl': -0.25999999046325684, 'parallax': 1.1651986837387085, 'pm_parallax_
-Cov': {'pmRaSigma': 0.0, 'pmDeclSigma': 0.0, 'parallaxSigma': 0.0, 'pmRa_pmDecl_Cov
-': 0.0, 'pmRa_parallax_Cov': 0.0, 'pmDecl_parallax_Cov': 0.0}, 'pmParallaxLnL': 0.2
-90818989276886, 'pmParallaxChi2': 0.399796724319458, 'pmParallaxNdata': 0, 'uPSFlux
-Mean': None, 'uPSFluxMeanErr': None, 'uPSFluxSigma': None, 'uPSFluxChi2': None, 'uP
-SFluxNdata': None, 'gPSFluxMean': None, 'gPSFluxMeanErr': None, 'gPSFluxSigma': Non
-e, 'gPSFluxChi2': None, 'gPSFluxNdata': None, 'rPSFluxMean': None, 'rPSFluxMeanErr'
-: None, 'rPSFluxSigma': None, 'rPSFluxChi2': None, 'rPSFluxNdata': None, 'iPSFluxMe
-an': None, 'iPSFluxMeanErr': None, 'iPSFluxSigma': None, 'iPSFluxChi2': None, 'iPSF
-luxNdata': None, 'zPSFluxMean': None, 'zPSFluxMeanErr': None, 'zPSFluxSigma': None,
- 'zPSFluxChi2': None, 'zPSFluxNdata': None, 'yPSFluxMean': None, 'yPSFluxMeanErr': 
-None, 'yPSFluxSigma': None, 'yPSFluxChi2': None, 'yPSFluxNdata': None, 'uFPFluxMean
-': None, 'uFPFluxMeanErr': None, 'uFPFluxSigma': None, 'gFPFluxMean': None, 'gFPFlu
-xMeanErr': None, 'gFPFluxSigma': None, 'rFPFluxMean': None, 'rFPFluxMeanErr': None,
- 'rFPFluxSigma': None, 'iFPFluxMean': None, 'iFPFluxMeanErr': None, 'iFPFluxSigma':
- None, 'zFPFluxMean': None, 'zFPFluxMeanErr': None, 'zFPFluxSigma': None, 'yFPFluxM
-ean': None, 'yFPFluxMeanErr': None, 'yFPFluxSigma': None, 'uLcPeriodic': None, 'gLc
-Periodic': None, 'rLcPeriodic': None, 'iLcPeriodic': None, 'zLcPeriodic': None, 'yL
-cPeriodic': None, 'uLcNonPeriodic': None, 'gLcNonPeriodic': None, 'rLcNonPeriodic':
- None, 'iLcNonPeriodic': None, 'zLcNonPeriodic': None, 'yLcNonPeriodic': None, 'nea
-rbyObj1': None, 'nearbyObj1Dist': None, 'nearbyObj1LnP': None, 'nearbyObj2': None, 
-'nearbyObj2Dist': None, 'nearbyObj2LnP': None, 'nearbyObj3': None, 'nearbyObj3Dist'
-: None, 'nearbyObj3LnP': None, 'flags': 873}, 'ssObject': None, 'diaObjectL2': None
-, 'diaSourcesL2': None}
+      & Expected Result & 
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Runs without error
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & \begin{minipage}[t]{2cm}{Actual\\ Result}\end{minipage}   & 
+      \begin{minipage}[t]{13cm}{\footnotesize
+      
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+
+      & Status          & Pass \\ \hline
+
+      7 & Description &
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      \begin{verbatim}
+Start a producer that reads alert packets from disk and loads them into the Kafka queue:
 \end{verbatim}
-}
- \\\cline{2-2}
-  & Step Status: PASS \\\hline
-\end{longtable}
 
-
-
-
-\subsection{LVV-T218(1.0): Simple Filtering of the LSST Alert Stream}
-\label{sect:detail-lvv-t216}
-
-Test Execution Status: CONDITIONAL PASS
-
-Summary: Missing git-lfs in step 2 and 3. Used docker image instead. Last step result deviated sligthly from the expected result for one consumer.
-
-Issues found: none.
-
-Steps Executions Report:
-
-\begin{longtable}{p{2cm}p{14cm}}
-\hline
-{Step} & {Actual Results and Status}\\ \hline
-1 & Expected Result: Runs without error \\\cline{2-2}
-  & Actual REsult: runs without error \\\cline{2-2}
-  & Step Status: PASS \\\hline
-2 & Expected Result: Runs without error \\\cline{2-2}
-  & Actual Result: Did not execute because of missing git-lfs; used pre-built Docker image instead. \\\cline{2-2}
-  & Step Status: CONDITIONAL PASS \\\hline
-3 & Expected Result: Runs without error \\\cline{2-2}
-  & Actual Result: Did not execute because of missing git-lfs; used pre-built Docker image instead \\\cline{2-2}
-  & Step Status: CONDITIONAL PASS \\\hline
-4 & Expected Result: Runs without error \\\cline{2-2}
-  & Actual Result: \\\cline{2-2}
-  & Step Status: PASS \\\hline
-5 & Expected Result: Output should be similar to:
-
-\scriptsize{
 \begin{verbatim}
-kubectl get pods
-NAME                        READY     STATUS    RESTARTS   AGE
-kafka-768ddf5564-xwgvh      1/1       Running   0          31s
-zookeeper-f798cc548-mgkpn   1/1       Running   0          1m
-
-kubectl get services
-NAME        TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)     AGE
-kafka       ClusterIP   10.105.19.124   <none>        9092/TCP    6s
-zookeeper   ClusterIP   10.97.110.124   <none>        32181/TCP   2m
+kubectl create -f sender-deployment.yaml
 \end{verbatim}
-}
-\\\cline{2-2}
-  & Actual Result: \\\cline{2-2}
-  & Step Status: PASS \\\hline
-6 & Expected Result: Runs without error \\\cline{2-2}
-  & Actual Result: \\\cline{2-2}
-  & Step Status: PASS \\\hline
-7 & Expected Result: Runs without error \\\cline{2-2}
-  & Actual Result: \\\cline{2-2}
-  & Step Status: PASS \\\hline
-8 & Expected Result: Runs without error \\\cline{2-2}
-  & Actual Result: \\\cline{2-2}
-  & Step Status: PASS \\\hline
-9 & Expected Result: Similar to
 
-\scriptsize{
-\begin{verbatim}
-kubectl logs sender-7d6f98586f-nhwfj
-visit: 1570.     time: 1530588618.0313473
-visits finished: 1      time: 1530588653.5614944
-visit: 1571.     time: 1530588657.0087624
-visits finished: 2      time: 1530588692.506188
-visit: 1572.     time: 1530588696.0051727
-visits finished: 3      time: 1530588731.5900314
-\end{verbatim}
-}
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
 
-\\\cline{2-2}
-  & Actual Result:
+      & Expected Result & 
 
-\scriptsize{
-\begin{verbatim}
-visit: 1570.     time: 1530675627.0249922
-visits finished: 1      time: 1530675664.2054636
-visit: 1571.     time: 1530675666.00571
-visits finished: 2      time: 1530675702.7181122
-visit: 1572.     time: 1530675705.0034182
-visits finished: 3      time: 1530675741.6658716
-visit: 1573.     time: 1530675744.0031254
-visits finished: 4      time: 1530675780.6261215
-visit: 1574.     time: 1530675783.0040474
-\end{verbatim}
-}
- \\\cline{2-2}
-  & Step Status: PASS\\\hline
-10 & Expected Result: 
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Runs without error
 
-\scriptsize{
-\begin{verbatim}
-{'alertId': 12132024420, 'l1dbId': 71776805594116, 'diaSource': {'diaSourceId':
-73499448928374785, 'ccdVisitId': 2020011570, 'diaObjectId': 71776805594116, 'ssO
-bjectId': None, 'parentDiaSourceId': None, 'midPointTai': 59595.37041, 'filterNa
-me': 'y', 'ra': 172.24912810036074, 'decl': -80.64214929176521, 'ra_decl_Cov': {
-'raSigma': 0.0003428002819418907, 'declSigma': 0.00027273103478364646, 'ra_decl_
-Cov': 0.000628734880592674}, 'x': 2979.08837890625, 'y': 3843.328857421875, 'x_y
-_Cov': {'xSigma': 0.6135467886924744, 'ySigma': 0.77132648229599, 'x_y_Cov': 0.0
-007463791407644749}, 'apFlux': None, 'apFluxErr': None, 'snr': 0.366516500711441
-04, 'psFlux': 7.698232025177276e-07, 'psRa': None, 'psDecl': None, 'ps_Cov': Non
-e, 'psLnL': None, 'psChi2': None, 'psNdata': None, 'trailFlux': None, 'trailRa':
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & \begin{minipage}[t]{2cm}{Actual\\ Result}\end{minipage}   & 
+      \begin{minipage}[t]{13cm}{\footnotesize
+      
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+
+      & Status          & Pass \\ \hline
+
+      8 & Description &
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Determine the name of the alert sender pod with\\[2\baselineskip]kubectl
+get pods\\[2\baselineskip]Examine output log
+files.\\[2\baselineskip]kubectl logs \textless{}pod
+name\textgreater{}\\[2\baselineskip]Verify that alerts are being sent
+within 40 seconds by subtracting the timing measurements.
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & Expected Result & 
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Similar to\\[2\baselineskip]kubectl logs sender-7d6f98586f-nhwfj\\
+visit: 1570. ~ ~ time: 1530588618.0313473\\
+visits finished: 1 ~ ~ ~time: 1530588653.5614944\\
+visit: 1571. ~ ~ time: 1530588657.0087624\\
+visits finished: 2 ~ ~ ~time: 1530588692.506188\\
+visit: 1572. ~ ~ time: 1530588696.0051727\\
+visits finished: 3 ~ ~ ~time: 1530588731.5900314\\[3\baselineskip]
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & \begin{minipage}[t]{2cm}{Actual\\ Result}\end{minipage}   & 
+      \begin{minipage}[t]{13cm}{\footnotesize
+      visit: 1570. ~ ~ time: 1530674964.0035944\\
+visits finished: 1 ~ ~ ~time: 1530675000.5279133\\
+visit: 1571. ~ ~ time: 1530675003.00461\\
+visits finished: 2 ~ ~ ~time: 1530675039.5390277\\
+visit: 1572. ~ ~ time: 1530675042.005049\\
+visits finished: 3 ~ ~ ~time: 1530675078.4921534\\
+visit: 1573. ~ ~ time: 1530675081.0037167\\[3\baselineskip]
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+
+      & Status          & Pass \\ \hline
+
+      9 & Description &
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Determine the name of the consumer pod with\\[2\baselineskip]kubectl get
+pods\\[2\baselineskip]Examine output log files.\\[2\baselineskip]kubectl
+logs \textless{}pod name\textgreater{}\\[2\baselineskip]The packet log
+should show deserialized alert packets with contents matching the input
+packets.\\[2\baselineskip]
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & Expected Result & 
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Similar to \{'alertId': 12132024420, `l1dbId': 71776805594116,
+`diaSource': \{'diaSourceId':\\
+73499448928374785, `ccdVisitId': 2020011570, `diaObjectId':
+71776805594116, 'ssO\\
+bjectId': None, `parentDiaSourceId': None, `midPointTai': 59595.37041,
+'filterNa\\
+me': `y', `ra': 172.24912810036074, `decl': -80.64214929176521,
+`ra\_decl\_Cov': \{\\
+`raSigma': 0.0003428002819418907, `declSigma': 0.00027273103478364646,
+'ra\_decl\_\\
+Cov': 0.000628734880592674\}, `x': 2979.08837890625, `y':
+3843.328857421875, 'x\_y\\
+\_Cov': \{'xSigma': 0.6135467886924744, `ySigma': 0.77132648229599,
+`x\_y\_Cov': 0.0\\
+007463791407644749\}, `apFlux': None, `apFluxErr': None, `snr':
+0.366516500711441\\
+04, `psFlux': 7.698232025177276e-07, `psRa': None, `psDecl': None,
+`ps\_Cov': Non\\
+e, `psLnL': None, `psChi2': None, `psNdata': None, `trailFlux': None,
+`trailRa':\\
 etc.
-\end{verbatim}
-}
-\\\cline{2-2}
-  & Actual Result: 
 
-\tiny{
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & \begin{minipage}[t]{2cm}{Actual\\ Result}\end{minipage}   & 
+      \begin{minipage}[t]{13cm}{\footnotesize
+      ​​​​topic:full-stream, partition:0, status:end, offset:0, key:None,
+time:1530674576.589\\
+\{'alertId': 12132024420, `l1dbId': 71776805594116, `diaSource':
+\{'diaSourceId': 73499448928374785, `ccdVisitId': 2020011570,
+`diaObjectId': 71776805594116, `ssObjectId': None, `parentDiaSourceId':
+None, `midPointTai': 59595.37041, `filterName': `y', `ra':
+172.24912810036074, `decl': -80.64214929176521, `ra\_decl\_Cov':
+\{'raSigma': 0.0003428002819418907, `declSigma': 0.00027273103478364646,
+`ra\_decl\_Cov': 0.000628734880592674\}, `x': 2979.08837890625, `y':
+3843.328857421875, `x\_y\_Cov': \{'xSigma': 0.6135467886924744,
+`ySigma': 0.77132648229599, `x\_y\_Cov': 0.0007463791407644749\},
+`apFlux': None, `apFluxErr': None, `snr': 0.36651650071144104, `psFlux':
+7.698232025177276e-07, `psRa': None, `psDecl': None, `ps\_Cov': None,
+`psLnL': None, `psChi2': None, `psNdata': None, `trailFlux': None,
+`trailRa': None, `trailDecl': None, `trailLength': None, `trailAngle':
+None, `trail\_Cov': None, `trailLnL': None, `trailChi2': None,
+`trailNdata': None, `dipMeanFlux': None, `dipFluxDiff': None, `dipRa':
+None, `dipDecl': None, `dipLength': None, `dipAngle': None, `dip\_Cov':
+None, `dipLnL': None, `dipChi2': None, `dipNdata': None, `totFlux':
+7.267262844834477e-06, `totFluxErr': 1.990927557926625e-06, `diffFlux':
+7.698232025177276e-07, `diffFluxErr': 2.1003779693273827e-06, `fpBkgd':
+None, `fpBkgdErr': None, `ixx': None, `iyy': None, `ixy': None,
+`i\_cov': None, `ixxPSF': None, `iyyPSF': None, `ixyPSF': None,
+`extendedness': None, `spuriousness': None, `flags': 516\},
+`prv\_diaSources': None, `diaObject': \{'diaObjectId': 71776805594116,
+`ra': 172.249128110081, `decl': -80.64214929171955, `ra\_decl\_Cov':
+\{'raSigma': 0.0003098504093941301, `declSigma': 0.0001309745421167463,
+`ra\_decl\_Cov': 0.0007125047268345952\}, `radecTai': 59595.139501,
+`pmRa': -9.0, `pmDecl': -0.25999999046325684, `parallax':
+1.1651986837387085, `pm\_parallax\_Cov': \{'pmRaSigma': 0.0,
+`pmDeclSigma': 0.0, `parallaxSigma': 0.0, `pmRa\_pmDecl\_Cov': 0.0,
+`pmRa\_parallax\_Cov': 0.0, `pmDecl\_parallax\_Cov': 0.0\},
+`pmParallaxLnL': 0.290818989276886, `pmParallaxChi2': 0.399796724319458,
+`pmParallaxNdata': 0, `uPSFluxMean': None, `uPSFluxMeanErr': None,
+`uPSFluxSigma': None, `uPSFluxChi2': None, `uPSFluxNdata': None,
+`gPSFluxMean': None, `gPSFluxMeanErr': None, `gPSFluxSigma': None,
+`gPSFluxChi2': None, `gPSFluxNdata': None, `rPSFluxMean': None,
+`rPSFluxMeanErr': None, `rPSFluxSigma': None, `rPSFluxChi2': None,
+`rPSFluxNdata': None, `iPSFluxMean': None, `iPSFluxMeanErr': None,
+`iPSFluxSigma': None, `iPSFluxChi2': None, `iPSFluxNdata': None,
+`zPSFluxMean': None, `zPSFluxMeanErr': None, `zPSFluxSigma': None,
+`zPSFluxChi2': None, `zPSFluxNdata': None, `yPSFluxMean': None,
+`yPSFluxMeanErr': None, `yPSFluxSigma': None, `yPSFluxChi2': None,
+`yPSFluxNdata': None, `uFPFluxMean': None, `uFPFluxMeanErr': None,
+`uFPFluxSigma': None, `gFPFluxMean': None, `gFPFluxMeanErr': None,
+`gFPFluxSigma': None, `rFPFluxMean': None, `rFPFluxMeanErr': None,
+`rFPFluxSigma': None, `iFPFluxMean': None, `iFPFluxMeanErr': None,
+`iFPFluxSigma': None, `zFPFluxMean': None, `zFPFluxMeanErr': None,
+`zFPFluxSigma': None, `yFPFluxMean': None, `yFPFluxMeanErr': None,
+`yFPFluxSigma': None, `uLcPeriodic': None, `gLcPeriodic': None,
+`rLcPeriodic': None, `iLcPeriodic': None, `zLcPeriodic': None,
+`yLcPeriodic': None, `uLcNonPeriodic': None, `gLcNonPeriodic': None,
+`rLcNonPeriodic': None, `iLcNonPeriodic': None, `zLcNonPeriodic': None,
+`yLcNonPeriodic': None, `nearbyObj1': None, `nearbyObj1Dist': None,
+`nearbyObj1LnP': None, `nearbyObj2': None, `nearbyObj2Dist': None,
+`nearbyObj2LnP': None, `nearbyObj3': None, `nearbyObj3Dist': None,
+`nearbyObj3LnP': None, `flags': 873\}, `ssObject': None, `diaObjectL2':
+None, `diaSourcesL2': None\}\\[3\baselineskip]
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+
+      & Status          & Pass \\ \hline
+
+    \end{longtable}
+
+
+    \paragraph{Test Case LVV-T218 }\mbox{}\\
+
+Open  \href{https://jira.lsstcorp.org/secure/Tests.jspa#/testCase/LVV-T218}{\textit{ LVV-T218 } }
+test case in Jira.
+
+    This test will demonstrate the LSST Alert Filtering Service that returns
+a subset of alerts from the full stream identified by user-provided
+filters.\\[2\baselineskip]Specifically, this will demonstrate that:\\
+
+\begin{itemize}
+\tightlist
+\item
+  The filtering service can retrieve alerts from the full alert stream
+  and filter them according to their contents; ~ ~
+\item
+  The filtered subset can be delivered to science users.
+\end{itemize}
+
+
+    {\bf Preconditions}:\\
+    Input data: A sample of Avro-formatted alert packets derived from LSST
+simulations corresponding to one night of simulated LSST observing.
+
+
+    Execution status: {\bf Conditional Pass }
+
+    Final comment:\\Missing git-lfs in step 2 and 3. Used docker image instead. Last step
+result deviated sligthly from the expected result for one consumer.
+
+
+
+    Detailed step results:
+
+    \begin{longtable}{p{1cm}p{2cm}p{13cm}}
+    \hline
+    {Step} & \multicolumn{2}{c}{Description, Results and Status}\\ \hline
+      1 & Description &
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Download Kafka Docker image from
+https://github.com/lsst-dm/alert\_stream.
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & Expected Result & 
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Runs without error
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & \begin{minipage}[t]{2cm}{Actual\\ Result}\end{minipage}   & 
+      \begin{minipage}[t]{13cm}{\footnotesize
+      
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+
+      & Status          & Pass \\ \hline
+
+      2 & Description &
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Change to the alert\_stream directory and build the docker image.\\
+
 \begin{verbatim}
-kubectl logs consumer1-6cdf9b57f4-swrpk | head -n 2
-topic:Filter001, partition:0, status:end, offset:0, key:None, time:1530675384.799
-{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 
-'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId':...
-
-consumer 2:
-topic:Filter011, partition:0, status:end, offset:0, key:None, time:1530675474.542
-{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 
-'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None, ...
-
-consumer 3:
-topic:Filter021, partition:0, status:end, offset:0, key:None, time:1530675385.857
-{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 
-'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None...
-
-consumer 4:
-topic:Filter031, partition:0, status:end, offset:0, key:None, time:1530675386.571
-{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 
-'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None,...
-
-consumer 5:
-topic:Filter041, partition:0, status:end, offset:0, key:None, time:1530675387.331
-{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 
-'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None,...
-
-consumer 6:
-%3|1530675391.040|FAIL|rdkafka#consumer-1| [thrd:kafka.alerts-lsst.svc.cluster.local:9092/bootstrap]
-: kafka.alerts-lsst.svc.cluster.local:9092/bootstrap: Failed to resolve 'kafka.alerts-lsst.svc.clust
-er.local:9092': Temporary failure in name resolution
-%3|1530675391.040|ERROR|rdkafka#consumer-1| [thrd:kafka.alerts-lsst.svc.cluster.local:9092/bootstrap
-]: kafka.alerts-lsst.svc.cluster.local:9092/bootstrap: Failed to resolve 'kafka.alerts-lsst.svc.clus
-ter.local:9092': Temporary failure in name resolution
-%3|1530675391.040|ERROR|rdkafka#consumer-1| [thrd:kafka.alerts-lsst.svc.cluster.local:9092/bootstrap
-]: 1/1 brokers are down
-
-consumer 7:
-topic:Filter061, partition:0, status:end, offset:0, key:None, time:1530675375.359
-{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 
-'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None, 'parentDiaSourceId':...
-
-consumer 8:
-topic:Filter071, partition:0, status:end, offset:0, key:None, time:1530675391.847
-{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 
-'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None...
-
-consumer 9:
-topic:Filter081, partition:0, status:end, offset:0, key:None, time:1530675375.094
-{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 
-'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None,...
-
-consumer 10:
-topic:Filter091, partition:0, status:end, offset:0, key:None, time:1530675385.894
-{'alertId': 12132024334, 'l1dbId': 71776752985092, 'diaSource': {'diaSourceId': 73499395056734209, 
-'ccdVisitId': 1020011570, 'diaObjectId': 71776752985092, 'ssObjectId': None...
+docker build -t "lsst-kub001:5000/alert_stream"
 \end{verbatim}
-}
-\\\cline{2-2}
-  & Step Status: CONDITIONAL PASS\\\hline
-\end{longtable}
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & Expected Result & 
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Runs without error
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & \begin{minipage}[t]{2cm}{Actual\\ Result}\end{minipage}   & 
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Did not execute because of missing git-lfs; used pre-built Docker image
+instead
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
 
 
+      & Status          & Conditional Pass \\ \hline
+
+      3 & Description &
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Register it with Kubernetes\\[2\baselineskip]docker push
+lsst-kub001:5000/alert\_stream
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & Expected Result & 
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Runs without error
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & \begin{minipage}[t]{2cm}{Actual\\ Result}\end{minipage}   & 
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Did not execute because of missing git-lfs; used pre-built Docker image
+instead
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
 
 
+      & Status          & Conditional Pass \\ \hline
 
-\newpage
-\appendix
-\section{Additional Analysis}
+      4 & Description &
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      From the alert\_stream/kubernetes directory, start Kafka and
+Zookeeper:\\[2\baselineskip]
+
+\begin{verbatim}
+kubectl create -f zookeeper-service.yaml
+kubectl create -f zookeeper-deployment.yaml
+kubectl create -f kafka-deployment.yaml
+kubectl create -f kafka-service.yaml
+\end{verbatim}
+
+(use kubectl get pods/services between each command to check status;
+wait until each is ``Running'' before starting the next
+command)\\[2\baselineskip]
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & Expected Result & 
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Runs without error
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & \begin{minipage}[t]{2cm}{Actual\\ Result}\end{minipage}   & 
+      \begin{minipage}[t]{13cm}{\footnotesize
+      
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
 
 
+      & Status          & Pass \\ \hline
+
+      5 & Description &
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Confirm Kafka and Zookeeper are listed when
+running\\[2\baselineskip]kubectl get
+pods\\[2\baselineskip]and\\[2\baselineskip]kubectl get services
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & Expected Result & 
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Output should be similar to:\\[2\baselineskip]kubectl get pods\\
+NAME ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~READY ~ ~ STATUS ~ ~RESTARTS ~ AGE\\
+kafka-768ddf5564-xwgvh ~ ~ ~1/1 ~ ~ ~ Running ~ 0 ~ ~ ~ ~ ~31s\\
+zookeeper-f798cc548-mgkpn ~ 1/1 ~ ~ ~ Running ~ 0 ~ ~ ~ ~
+~1m\\[2\baselineskip]kubectl get services\\
+NAME ~ ~ ~ ~TYPE ~ ~ ~ ~CLUSTER-IP ~ ~ ~EXTERNAL-IP ~ PORT(S) ~ ~ AGE\\
+kafka ~ ~ ~ ClusterIP ~ 10.105.19.124 ~ \textless{}none\textgreater{} ~
+~ ~ ~9092/TCP ~ ~6s\\
+zookeeper ~ ClusterIP ~ 10.97.110.124 ~ \textless{}none\textgreater{} ~
+~ ~ ~32181/TCP ~ 2m
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & \begin{minipage}[t]{2cm}{Actual\\ Result}\end{minipage}   & 
+      \begin{minipage}[t]{13cm}{\footnotesize
+      
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+
+      & Status          & Pass \\ \hline
+
+      6 & Description &
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Start 100 consumers that consume the filtered streams and logs a
+deserialized version of every Nth packet:\\[2\baselineskip]
+
+\begin{verbatim}
+kubectl create -f consumer1-deployment.yaml
+kubectl create -f consumer2-deployment.yaml
+kubectl create -f consumer3-deployment.yaml
+kubectl create -f consumer4-deployment.yaml
+kubectl create -f consumer5-deployment.yaml
+kubectl create -f consumer6-deployment.yaml
+kubectl create -f consumer7-deployment.yaml
+kubectl create -f consumer8-deployment.yaml
+kubectl create -f consumer9-deployment.yaml
+kubectl create -f consumer10-deployment.yaml
+\end{verbatim}
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & Expected Result & 
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Runs without error
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & \begin{minipage}[t]{2cm}{Actual\\ Result}\end{minipage}   & 
+      \begin{minipage}[t]{13cm}{\footnotesize
+      
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+
+      & Status          & Pass \\ \hline
+
+      7 & Description &
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Start 5 filter groups:\\
+
+\begin{verbatim}
+kubectl create -f filterer1-deployment.yaml
+kubectl create -f filterer2-deployment.yaml
+kubectl create -f filterer3-deployment.yaml
+kubectl create -f filterer4-deployment.yaml
+kubectl create -f filterer5-deployment.yaml
+\end{verbatim}
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & Expected Result & 
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Runs without error
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & \begin{minipage}[t]{2cm}{Actual\\ Result}\end{minipage}   & 
+      \begin{minipage}[t]{13cm}{\footnotesize
+      
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+
+      & Status          & Pass \\ \hline
+
+      8 & Description &
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Start a producer that reads alert packets from disk and loads them into
+the Kafka queue:\\[2\baselineskip]
+
+\begin{verbatim}
+kubectl create -f sender-deployment.yaml
+\end{verbatim}
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & Expected Result & 
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Runs without error
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & \begin{minipage}[t]{2cm}{Actual\\ Result}\end{minipage}   & 
+      \begin{minipage}[t]{13cm}{\footnotesize
+      
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+
+      & Status          & Pass \\ \hline
+
+      9 & Description &
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Determine the name of the alert sender pod with\\[2\baselineskip]kubectl
+get pods\\[2\baselineskip]Examine output log
+files.\\[2\baselineskip]kubectl logs \textless{}pod
+name\textgreater{}\\[2\baselineskip]Verify that alerts are being sent
+within 40 seconds by subtracting the timing measurements.
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & Expected Result & 
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Similar to\\[2\baselineskip]kubectl logs sender-7d6f98586f-nhwfj\\
+visit: 1570. ~ ~ time: 1530588618.0313473\\
+visits finished: 1 ~ ~ ~time: 1530588653.5614944\\
+visit: 1571. ~ ~ time: 1530588657.0087624\\
+visits finished: 2 ~ ~ ~time: 1530588692.506188\\
+visit: 1572. ~ ~ time: 1530588696.0051727\\
+visits finished: 3 ~ ~ ~time: 1530588731.5900314\\[2\baselineskip]
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & \begin{minipage}[t]{2cm}{Actual\\ Result}\end{minipage}   & 
+      \begin{minipage}[t]{13cm}{\footnotesize
+      visit: 1570. ~ ~ time: 1530675627.0249922\\
+visits finished: 1 ~ ~ ~time: 1530675664.2054636\\
+visit: 1571. ~ ~ time: 1530675666.00571\\
+visits finished: 2 ~ ~ ~time: 1530675702.7181122\\
+visit: 1572. ~ ~ time: 1530675705.0034182\\
+visits finished: 3 ~ ~ ~time: 1530675741.6658716\\
+visit: 1573. ~ ~ time: 1530675744.0031254\\
+visits finished: 4 ~ ~ ~time: 1530675780.6261215\\
+visit: 1574. ~ ~ time: 1530675783.0040474\\[3\baselineskip]
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+
+      & Status          & Pass \\ \hline
+
+      10 & Description &
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Determine the name of the consumer pods with\\[2\baselineskip]kubectl
+get pods\\[2\baselineskip]Examine output log
+files.\\[2\baselineskip]kubectl logs \textless{}pod
+name\textgreater{}\\[2\baselineskip]The packet log should show
+deserialized alert packets with contents matching the input packets.
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & Expected Result & 
+
+      \begin{minipage}[t]{13cm}{\footnotesize
+      Similar to\\[2\baselineskip]\{'alertId': 12132024420, `l1dbId':
+71776805594116, `diaSource': \{'diaSourceId':\\
+73499448928374785, `ccdVisitId': 2020011570, `diaObjectId':
+71776805594116, 'ssO\\
+bjectId': None, `parentDiaSourceId': None, `midPointTai': 59595.37041,
+'filterNa\\
+me': `y', `ra': 172.24912810036074, `decl': -80.64214929176521,
+`ra\_decl\_Cov': \{\\
+`raSigma': 0.0003428002819418907, `declSigma': 0.00027273103478364646,
+'ra\_decl\_\\
+Cov': 0.000628734880592674\}, `x': 2979.08837890625, `y':
+3843.328857421875, 'x\_y\\
+\_Cov': \{'xSigma': 0.6135467886924744, `ySigma': 0.77132648229599,
+`x\_y\_Cov': 0.0\\
+007463791407644749\}, `apFlux': None, `apFluxErr': None, `snr':
+0.366516500711441\\
+04, `psFlux': 7.698232025177276e-07, `psRa': None, `psDecl': None,
+`ps\_Cov': Non\\
+e, `psLnL': None, `psChi2': None, `psNdata': None, `trailFlux': None,
+`trailRa':\\
+etc.
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+      & \begin{minipage}[t]{2cm}{Actual\\ Result}\end{minipage}   & 
+      \begin{minipage}[t]{13cm}{\footnotesize
+      kubectl logs consumer1-6cdf9b57f4-swrpk \textbar{} head -n 2\\
+topic:Filter001, partition:0, status:end, offset:0, key:None,
+time:1530675384.799\\
+\{'alertId': 12132024334, `l1dbId': 71776752985092, `diaSource':
+\{'diaSourceId': 73499395056734209, `ccdVisitId': 1020011570,
+`diaObjectId': 71776752985092,
+`ssObjectId':\ldots{}\\[2\baselineskip]consumer 2:\\
+topic:Filter011, partition:0, status:end, offset:0, key:None,
+time:1530675474.542\\
+\{'alertId': 12132024334, `l1dbId': 71776752985092, `diaSource':
+\{'diaSourceId': 73499395056734209, `ccdVisitId': 1020011570,
+`diaObjectId': 71776752985092, `ssObjectId': None,
+\ldots{}\\[2\baselineskip](similar results for consumers 3-5,
+7-10)\\[2\baselineskip]consumer 6:\\
+\%3\textbar{}1530675391.040\textbar{}FAIL\textbar{}rdkafka\#consumer-1\textbar{}
+{[}thrd:kafka.alerts-lsst.svc.cluster.local:9092/bootstrap{]}:
+kafka.alerts-lsst.svc.cluster.local:9092/bootstrap: Failed to resolve
+`kafka.alerts-lsst.svc.cluster.local:9092': Temporary failure in name
+resolution\\
+\%3\textbar{}1530675391.040\textbar{}ERROR\textbar{}rdkafka\#consumer-1\textbar{}
+{[}thrd:kafka.alerts-lsst.svc.cluster.local:9092/bootstrap{]}:
+kafka.alerts-lsst.svc.cluster.local:9092/bootstrap: Failed to resolve
+`kafka.alerts-lsst.svc.cluster.local:9092': Temporary failure in name
+resolution\\
+\%3\textbar{}1530675391.040\textbar{}ERROR\textbar{}rdkafka\#consumer-1\textbar{}
+{[}thrd:kafka.alerts-lsst.svc.cluster.local:9092/bootstrap{]}: 1/1
+brokers are down
+
+      \vspace{\dp0}
+      } \end{minipage} \\
+      \\ \cdashline{2-3}
+
+
+      & Status          & Conditional Pass \\ \hline
+
+    \end{longtable}
+
+
+\input{appendix.tex}
 \end{document}
